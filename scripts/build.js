@@ -54,6 +54,10 @@ const pageOut = page => page.slug === "index" ? path.join(dist, "index.html") : 
 const canonical = page => `${site.baseUrl}${page.url === "/" ? "/" : page.url}`;
 const active = (page, href) => page.url === href ? ' aria-current="page"' : "";
 const socialImagePath = page => `/og/${page.slug === "index" ? "home" : page.slug}.jpg`;
+const smsMessage = "I'd love to reserve the Sapelo House. Please contact me at your earliest convenience.";
+const smsHref = `sms:+19126820830?body=${encodeURIComponent(smsMessage)}`;
+const textCta = (label, kind = "dark") => `<a class="btn ${kind}" href="${smsHref}">${esc(label)}</a>`;
+const paragraphs = copy => (Array.isArray(copy) ? copy : [copy]).map(item => `<p>${esc(item)}</p>`).join("");
 const applyPagesBasePath = html => pagesBasePath
   ? html
       .replaceAll('href="/', `href="${pagesBasePath}/`)
@@ -176,8 +180,8 @@ function head(page) {
   <meta property="og:type" content="website">
   <meta property="og:locale" content="${site.locale}">
   <meta property="og:site_name" content="${esc(site.name)}">
-  <meta property="og:title" content="${esc(page.title)}">
-  <meta property="og:description" content="${esc(page.description)}">
+  <meta property="og:title" content="${esc(page.ogTitle || page.title)}">
+  <meta property="og:description" content="${esc(page.ogDescription || page.description)}">
   <meta property="og:url" content="${canonical(page)}">
   <meta property="og:image" content="${site.baseUrl}${socialImage}">
   <meta property="og:image:secure_url" content="${site.baseUrl}${socialImage}">
@@ -187,8 +191,8 @@ function head(page) {
   <meta property="og:image:alt" content="${esc(heroImage.alt)}">
   <link rel="icon" type="image/webp" href="${imgPath(images.riverMoss)}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${esc(page.title)}">
-  <meta name="twitter:description" content="${esc(page.description)}">
+  <meta name="twitter:title" content="${esc(page.twitterTitle || page.ogTitle || page.title)}">
+  <meta name="twitter:description" content="${esc(page.twitterDescription || page.ogDescription || page.description)}">
   <meta name="twitter:image" content="${site.baseUrl}${socialImage}">
   <meta name="twitter:image:alt" content="${esc(heroImage.alt)}">
   <link rel="preload" as="image" type="image/webp" href="${responsiveImgPath(heroImage, 1600)}" fetchpriority="high">
@@ -222,12 +226,12 @@ function hero(page) {
     booking: "center 62%",
     faq: "center 58%"
   };
-  return `<section class="hero" style="--hero-image: image-set(url('${responsiveImgPath(heroImage, 1600)}') 1x, url('${imgPath(heroImage)}') 2x); --hero-position: ${positions[page.heroKey]};">
+  return `<section class="hero hero-${page.slug}" style="--hero-image: image-set(url('${responsiveImgPath(heroImage, 1600)}') 1x, url('${imgPath(heroImage)}') 2x); --hero-position: ${positions[page.heroKey]};">
   <div class="hero-content">
     <p class="eyebrow">${esc(page.eyebrow)}</p>
     <h1>${esc(page.h1)}</h1>
-    <p class="hero-copy">${esc(page.intro)}</p>
-    ${page.ctas ? `<div class="hero-actions">${page.ctas.map(([label, href, kind]) => `<a class="btn ${kind}" href="${href}">${label}</a>`).join("")}</div>` : ""}
+    <div class="hero-copy">${paragraphs(page.intro)}</div>
+    ${page.ctas ? `<div class="hero-actions">${page.ctas.map(([label, , kind]) => textCta(label, kind)).join("")}</div>` : ""}
     ${page.highlights ? `<ul class="hero-facts">${page.highlights.map(item => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}
   </div>
 </section>`;
@@ -238,7 +242,7 @@ function footer() {
   <div class="container footer-grid">
     <div>
       <p class="footer-brand">Sapelo House</p>
-      <p>A peaceful coastal Georgia vacation rental across from the Sapelo River.</p>
+      <p>Sapelo House is a peaceful coastal Georgia vacation rental across from the Sapelo River, a place for screened-porch mornings, nearby fishing, coastal adventures, long conversations, and time together.</p>
     </div>
     <nav class="footer-links" aria-label="Footer navigation">
       ${site.nav.map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}
@@ -285,9 +289,16 @@ function homeBody() {
   return `<main id="main">
   <section class="section intro-section">
     <div class="container editorial-intro">
-      <p class="intro-kicker">SapeloHouse.com</p>
-      <h2>A coastal Georgia stay where the river setting does the selling.</h2>
-      <p>Sapelo House is not presented as a generic rental. The site is built around the real images: live oaks over the Sapelo River, shaded porch seating, a back deck with grill, and interior spaces meant for gathering after days outside.</p>
+      <p class="intro-kicker">Welcome to Sapelo House</p>
+      <h2>Some places give you somewhere to stay. Others give you a story to take home.</h2>
+      <div class="story-copy">${paragraphs([
+        "There is a moment when you arrive on this part of the Georgia coast when everything seems to change.",
+        "The roads become quieter. Live oaks begin stretching over the landscape. Spanish moss moves gently in the breeze. And somewhere beyond the trees, tidal water winds through a world that seems to operate on its own clock.",
+        "Sapelo House belongs to that world.",
+        "Across from the Sapelo River, it is a comfortable place to gather, cook, laugh, play pool, sit outside, explore the coast, and remember how good it feels when nobody is rushing you toward the next thing.",
+        "Wake up with coffee on the screened porch and watch the river setting come alive. Spend the afternoon fishing nearby or exploring Darien, St. Simons Island, Jekyll Island, or Savannah. Then come home, fire up the grill, settle into the back deck, and let evening arrive without much of a plan.",
+        "Because sometimes the trips we remember most are not the ones where we did everything. They are the ones where we finally had time for each other."
+      ])}</div>
     </div>
     <div class="container wide-photo-feature">
       ${imagePanel("riverMoss", "Sapelo River scenery framed by Spanish moss")}
@@ -297,32 +308,55 @@ function homeBody() {
     <div class="container section-heading">
       <div>
         <p class="eyebrow">Why Sapelo House</p>
-        <h2>A river-connected coastal stay with room to gather.</h2>
+        <h2>Come for coastal Georgia. Stay for the way it feels here.</h2>
       </div>
-      <p>Sapelo House pairs a peaceful coastal setting with the practical spaces people want in a vacation rental: a screened porch, a back deck with grill, large kitchen, dining room, living room, and pool table.</p>
+      <p>Sapelo House brings together two things that are surprisingly difficult to find in the same getaway: a beautiful coastal setting and a home with enough comfortable gathering spaces to actually enjoy the people you came with. From the screened porch and outdoor spaces to the large kitchen, dining room, living room, and pool table, everyone has room to settle in without losing the feeling of being together.</p>
     </div>
     <div class="container proof-grid photo-story-grid">
-      ${proofCard("riverMoss", "The Sapelo River Setting", "Live oaks, Spanish moss, and water views shape the first impression of the stay.")}
-      ${proofCard("frontPorch", "Screened Porch Mornings", "Guests can wake up and watch dolphins from the screened porch.")}
-      ${proofCard("openLivingKitchen", "Gathering Spaces", "The photos show open living, kitchen, dining, and recreation spaces for time together.")}
+      ${proofCard("riverMoss", "The River Sets the Pace", "Look through the live oaks and Spanish moss and the Sapelo River becomes part of the backdrop to your stay. It is the kind of view that makes you stand still for a second. After a few mornings here, standing still starts to feel like a very good idea.")}
+      ${proofCard("frontPorch", "Mornings Worth Waking Up For", "Bring your coffee to the screened porch before the day gets busy. Look toward the river. Watch for dolphins. Talk about what you might do today, or decide there is nowhere you particularly need to be.")}
+      ${proofCard("openLivingKitchen", "A House Made for Being Together", "The kitchen, dining area, living spaces, and pool table naturally pull people back together. Cook something. Challenge somebody to a game. Tell stories, laugh too loudly, and stay up later than you planned.")}
     </div>
   </section>
   <section class="section band">
     <div class="container feature">
       <div class="feature-copy">
-        <p class="eyebrow">Coastal rhythm</p>
-        <h2>Plan a stay around porch coffee, nearby fishing, and easy day trips.</h2>
-        <p>Use Sapelo House as a quiet home base for the Sapelo River area, Darien, Savannah, St. Simons Island, Jekyll Island, and the slower coastal evenings that make the trip feel unhurried.</p>
-        <div class="button-row"><a class="btn dark" href="/location/">Explore the Location</a><a class="btn light" href="/gallery/">View the Gallery</a></div>
+        <p class="eyebrow">Find Your Coastal Rhythm</p>
+        <h2>There is no itinerary required here.</h2>
+        <div class="story-copy compact">${paragraphs([
+          "Maybe you wake early and go fishing. Maybe you head toward Darien and spend the day discovering one of Georgia's historic coastal communities. Maybe St. Simons Island or Jekyll Island becomes today's adventure. Maybe Savannah calls for a longer day trip. Or maybe nobody wants to leave the house at all.",
+          "There is something wonderfully freeing about staying in a place where the day does not have to be optimized. Explore as much of coastal Georgia as you want and still know that, at the end of it, Sapelo House is waiting.",
+          "Come back. Put something on the grill. Find a chair outside. Pour a drink. Play another game of pool. Watch the light fade through the trees. Tomorrow can figure itself out tomorrow."
+        ])}</div>
+        <div class="button-row">${textCta("Discover the Area", "dark")}${textCta("See More of Sapelo House", "light")}</div>
       </div>
       <div class="feature-image">${imageTag(images.backDeck)}</div>
     </div>
   </section>
-  ${sensoryBand("The rare parts are the simple ones.", "Guests can watch dolphins from the screened porch, find excellent fishing opportunities nearby, and come home to spaces for cooking, dining, sitting outside, and playing pool together.", [
-    ["Morning", "Coffee on the screened porch, with the river experience close by."],
-    ["Day", "Fishing nearby or day trips to Darien, Savannah, St. Simons Island, and Jekyll Island."],
-    ["Evening", "A back deck with chairs and grill, then the pool table and shared rooms inside."]
+  ${sensoryBand("The best thing about Sapelo House may be what happens when nothing is happening.", "Rooms, furniture, appliances, and amenities matter. But years later, you remember the morning everybody stayed at the table talking, the dolphin seen from the porch, dinner outside, the pool game that got competitive, the quiet, the laughter, and realizing you had not checked the time in hours.", [
+    ["Morning", "Let the river wake up first. Step onto the screened porch with your coffee, look through the moss-draped trees, watch for dolphins, and give the day a chance to arrive slowly."],
+    ["Day", "Follow the coast wherever it leads. Go fishing nearby, explore Darien, spend the day on St. Simons Island or Jekyll Island, make Savannah part of the adventure, or simply wander."],
+    ["Evening", "Come home before the day is over. Take a seat on the back deck, put dinner on the grill, then wander inside for conversation or a game of pool."]
   ])}
+  <section class="section emotional-break">
+    <div class="container editorial-intro">
+      <p class="intro-kicker">The Part You Cannot Put on an Amenities List</p>
+      <h2>You may come here to see coastal Georgia. You may leave missing the porch.</h2>
+      <div class="story-copy">${paragraphs([
+        "That is the funny thing about places like Sapelo House. The grand adventures are wonderful. But when the trip is over, sometimes the things people miss are surprisingly small.",
+        "The chair where they drank their coffee. The trees moving in the morning breeze. The sound of everyone laughing inside. That familiar walk back through the door after a long day exploring.",
+        "For a few days, a vacation house starts feeling less like somewhere you rented and more like somewhere you belong. That is the experience we hope you find here."
+      ])}</div>
+    </div>
+  </section>
+  <section class="section booking-cta-band">
+    <div class="container booking-cta-inner">
+      <p class="eyebrow">Your Sapelo House Story</p>
+      <h2>Someday, this trip will be a story you tell.</h2>
+      <p>Maybe it becomes the weekend everybody keeps talking about. Maybe it is the family trip that finally gets everyone in the same place. Maybe it is a few quiet days you did not realize how badly you needed. Whatever brings you to coastal Georgia, Sapelo House gives you a beautiful place to begin. The river is here. The porch is waiting. And your dates may still be open.</p>
+      <div class="button-row">${textCta("Check Availability", "primary")}${textCta("Explore the House", "secondary")}</div>
+    </div>
+  </section>
 </main>`;
 }
 
@@ -471,36 +505,30 @@ function bookingBody() {
   return `<main id="main">
   <section class="section intro-section">
     <div class="container editorial-intro">
-      <p class="intro-kicker">Inquiry first</p>
-      <h2>Start with the dates, then shape the stay from there.</h2>
-      <p>Share your preferred travel window, group size, and questions in one simple place. Availability and final booking details can then be confirmed directly.</p>
+      <p class="intro-kicker">Your Sapelo House Story</p>
+      <h2>A quieter kind of coastal Georgia getaway begins with a conversation.</h2>
+      <p>Whether you are coming to fish, explore Darien and the Golden Isles, spend time with people you love, or simply disappear from the noise for a few days, text us to ask about your dates.</p>
     </div>
   </section>
   <section class="section">
     <div class="container contact-layout">
       <aside class="contact-panel">
         <p class="eyebrow">Plan your stay</p>
-        <h2>Start with dates and a few details.</h2>
-        <p>Use this inquiry to gather the essentials for a direct booking conversation: the travel window, group size, contact details, and any questions about the stay.</p>
+        <h2>Start with the dates. We will take it from there.</h2>
+        <p>A text opens a direct conversation about availability, your travel window, and the owner-specific details that matter before booking.</p>
         <ul class="quiet-list">
           <li>Ask about availability</li>
           <li>Share desired dates and guest count</li>
           <li>Ask owner-specific questions before booking</li>
         </ul>
       </aside>
-      <form class="form-panel" data-inquiry-form>
-        <div class="form-grid">
-          <div class="form-field"><label for="name">Name</label><input id="name" name="name" autocomplete="name" required></div>
-          <div class="form-field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-          <div class="form-field"><label for="phone">Phone</label><input id="phone" name="phone" autocomplete="tel"></div>
-          <div class="form-field"><label for="dates">Desired dates</label><input id="dates" name="dates" placeholder="Example: March 12-16"></div>
-          <div class="form-field full"><label for="guests">Number of guests</label><input id="guests" name="guests" inputmode="numeric"></div>
-          <div class="form-field full"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us what you are planning and any questions you have."></textarea></div>
-        </div>
-        <button class="btn dark" type="submit">Prepare Inquiry</button>
-        <p class="form-note">Inquiry delivery will be activated before the website launches.</p>
-        <p class="form-status" data-form-status aria-live="polite"></p>
-      </form>
+      <div class="form-panel direct-text-panel">
+        <p class="eyebrow">Text Sapelo House</p>
+        <h2>Ask about your dates directly.</h2>
+        <p>Your message will open prefilled on your device. Add preferred dates or questions before sending whenever you are ready.</p>
+        ${textCta("Text to Reserve Sapelo House", "dark")}
+        <p class="form-note">Text <a href="tel:+19126820830">912-682-0830</a>. Standard messaging rates may apply.</p>
+      </div>
     </div>
   </section>
 </main>`;
