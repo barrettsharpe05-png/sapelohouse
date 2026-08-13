@@ -57,6 +57,9 @@ const socialImagePath = page => `/og/${page.slug === "index" ? "home" : page.slu
 const smsMessage = "I'd love to reserve the Sapelo House. Please contact me at your earliest convenience.";
 const smsHref = `sms:+19126820830?body=${encodeURIComponent(smsMessage)}`;
 const textCta = (label, kind = "dark") => `<a class="btn ${kind}" href="${smsHref}">${esc(label)}</a>`;
+const heroCta = ([label, href, kind]) => href === "/house/"
+  ? `<a class="btn ${kind}" href="${href}">${esc(label)}</a>`
+  : textCta(label, kind);
 const paragraphs = copy => (Array.isArray(copy) ? copy : [copy]).map(item => `<p>${esc(item)}</p>`).join("");
 const applyPagesBasePath = html => pagesBasePath
   ? html
@@ -231,7 +234,7 @@ function hero(page) {
     <p class="eyebrow">${esc(page.eyebrow)}</p>
     <h1>${esc(page.h1)}</h1>
     <div class="hero-copy">${paragraphs(page.intro)}</div>
-    ${page.ctas ? `<div class="hero-actions">${page.ctas.map(([label, , kind]) => textCta(label, kind)).join("")}</div>` : ""}
+    ${page.ctas ? `<div class="hero-actions">${page.ctas.map(heroCta).join("")}</div>` : ""}
     ${page.highlights ? `<ul class="hero-facts">${page.highlights.map(item => `<li>${esc(item)}</li>`).join("")}</ul>` : ""}
   </div>
 </section>`;
@@ -239,14 +242,13 @@ function hero(page) {
 
 function footer() {
   return `<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <p class="footer-brand">Sapelo House</p>
-      <p>Sapelo House is a peaceful coastal Georgia vacation rental across from the Sapelo River, a place for screened-porch mornings, nearby fishing, coastal adventures, long conversations, and time together.</p>
-    </div>
+  <div class="container footer-inner">
+    <a class="footer-brand" href="/">Sapelo House</a>
+    <p class="footer-summary">A peaceful coastal Georgia stay across from the Sapelo River, made for porch mornings, coastal days, and unhurried time together.</p>
     <nav class="footer-links" aria-label="Footer navigation">
       ${site.nav.map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}
     </nav>
+    <p class="footer-credit">Site Architecture by <a href="https://barrettsharpe.com">Barrett Sharpe</a></p>
   </div>
 </footer>
 <script src="/main.js" defer></script>
