@@ -17,4 +17,5 @@ for source in "$image_dir"/*.webp; do
   magick "$source" -resize "1600x>" -quality 82 "$output_dir/$filename-1600.webp"
 done
 
-echo "Generated responsive variants for 30 source images."
+count=$(find "$image_dir" -maxdepth 1 -name '*.webp' | wc -l | tr -d ' ')
+echo "Generated responsive variants for $count source images."

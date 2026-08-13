@@ -1,6 +1,6 @@
 # Sapelo House WebP Image Package
 
-This package contains 30 WebP images converted from the original iPhone HEIC files.
+This package contains 30 WebP images converted from the original iPhone HEIC files and three additional first-party Sapelo River sunset photographs supplied by the owner.
 
 - Images are in the `images/` folder.
 - Filenames are SEO-oriented for Sapelo House, the Sapelo River, and Townsend, Georgia.

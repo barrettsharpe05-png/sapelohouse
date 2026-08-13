@@ -43,9 +43,11 @@ const esc = value =>
 
 const imgPath = image => `${site.imageBase}${image.file}`;
 const responsiveImgPath = (image, width) => `${site.imageBase}responsive/${image.file.replace(/\.webp$/, `-${width}.webp`)}`;
-const imageDimensions = image => portraitImages.has(image.file)
-  ? { width: 1800, height: 2400 }
-  : { width: 2400, height: 1800 };
+const imageDimensions = image => image.width && image.height
+  ? { width: image.width, height: image.height }
+  : portraitImages.has(image.file)
+    ? { width: 1800, height: 2400 }
+    : { width: 2400, height: 1800 };
 const imageTag = (image, sizes = "(max-width: 860px) calc(100vw - 32px), 50vw") => {
   const { width, height } = imageDimensions(image);
   return `<img src="${responsiveImgPath(image, 960)}" srcset="${responsiveImgPath(image, 960)} 960w, ${responsiveImgPath(image, 1600)} 1600w, ${imgPath(image)} ${width}w" sizes="${sizes}" width="${width}" height="${height}" alt="${esc(image.alt)}" loading="lazy" decoding="async">`;
@@ -79,6 +81,17 @@ const pageTopics = page => ({
   booking: ["Sapelo House availability", "coastal Georgia vacation rental inquiry"],
   faq: ["Sapelo House FAQ", "Sapelo River vacation rental questions", "coastal Georgia rental amenities"]
 }[page.slug]);
+
+const representativeImages = [
+  images.riverView,
+  images.exterior,
+  images.porchSeating,
+  images.kitchenIsland,
+  images.livingPool,
+  images.riverSunsetClouds,
+  images.riverSunsetReflection,
+  images.riverAfterglow
+];
 
 const schemaFor = page => {
   const pageUrl = canonical(page);
@@ -127,7 +140,7 @@ const schemaFor = page => {
         url: `${site.baseUrl}/`,
         description: site.description,
         mainEntityOfPage: { "@id": `${site.baseUrl}/#webpage` },
-        image: Object.values(images).map(image => `${site.baseUrl}${imgPath(image)}`),
+        image: representativeImages.map(image => `${site.baseUrl}${imgPath(image)}`),
         address: {
           "@type": "PostalAddress",
           addressRegion: "Georgia",
@@ -272,6 +285,20 @@ function imagePanel(key, caption) {
   </figure>`;
 }
 
+function sunsetFeature(key, eyebrow, title, caption) {
+  const image = images[key];
+  return `<section class="section sunset-feature">
+    <div class="sunset-feature-copy">
+      <p class="eyebrow">${esc(eyebrow)}</p>
+      <h2>${esc(title)}</h2>
+    </div>
+    <figure>
+      ${imageTag(image, "100vw")}
+      <figcaption>${esc(caption)}</figcaption>
+    </figure>
+  </section>`;
+}
+
 function sensoryBand(title, copy, items) {
   return `<section class="section sensory-band">
     <div class="container sensory-grid">
@@ -328,7 +355,10 @@ const galleryCaptions = {
   primaryBathVanity: "A double vanity and soaking tub in the primary bathroom.",
   primaryBathTub: "The primary bath with tub, walk-in shower, and storage.",
   guestBath: "A guest bathroom with clean coastal details.",
-  laundry: "A full-size washer and dryer for the practical side of a longer stay."
+  laundry: "A full-size washer and dryer for the practical side of a longer stay.",
+  riverSunsetReflection: "The sun and its reflection crossing the Sapelo River at the end of the day.",
+  riverSunsetClouds: "Clouds catching the last orange light above the Sapelo River.",
+  riverAfterglow: "Pink and blue afterglow settling over the Sapelo River."
 };
 
 function homeBody() {
@@ -479,6 +509,7 @@ function experienceBody() {
       ${proofCard("frontPorch", "Tomorrow Can Wait Until Morning", "The day ends without the normal world pressing in. Sit outside a little longer. Make plans if you want them. Leave the next day open if you do not.")}
     </div>
   </section>
+  ${sunsetFeature("riverSunsetClouds", "Evening on the Sapelo River", "And then the river changes again.", "An actual sunset on the Sapelo River in coastal Georgia.")}
   ${bookingInvitation("A Few Days at a Different Pace", "You do not need a full itinerary. You only need the dates.", "If this is how you want your next coastal Georgia getaway to feel, start the conversation with a text.")}
 </main>`;
 }
@@ -513,6 +544,7 @@ function locationBody() {
       <div class="feature-image">${imageTag(images.riverView)}</div>
     </div>
   </section>
+  ${sunsetFeature("riverAfterglow", "This Place, This River", "This is the Sapelo River after sunset.", "Evening color over the Sapelo River, photographed in the Sapelo House area.")}
   <section class="section dark-band">
     <div class="container section-heading">
       <div><p class="eyebrow">Choose a direction</p><h2>Four different coastal days, all within reach.</h2></div>
@@ -538,10 +570,11 @@ function galleryBody() {
       ${galleryGroups.map(group => `<section class="gallery-group" aria-labelledby="${group.title.toLowerCase().replaceAll(" ", "-")}">
         <h2 id="${group.title.toLowerCase().replaceAll(" ", "-")}">${esc(group.title)}</h2>
         <p>${esc(group.description)}</p>
-        <div class="gallery-grid">
+        <div class="gallery-grid${group.layout === "wide" ? " gallery-grid--wide" : ""}">
           ${group.keys.map(key => {
             const image = images[key];
-            return `<figure class="gallery-card">${imageTag(image, "(max-width: 860px) calc(100vw - 32px), 33vw")}<figcaption>${esc(galleryCaptions[key] || image.alt)}</figcaption></figure>`;
+            const sizes = group.layout === "wide" ? "(max-width: 1240px) calc(100vw - 40px), 1180px" : "(max-width: 860px) calc(100vw - 32px), 33vw";
+            return `<figure class="gallery-card">${imageTag(image, sizes)}<figcaption>${esc(galleryCaptions[key] || image.alt)}</figcaption></figure>`;
           }).join("")}
         </div>
       </section>`).join("")}
@@ -646,11 +679,17 @@ fs.writeFileSync(
 );
 
 const sitemapEntries = pages.map(page => {
-  const pageImages = page.slug === "gallery" ? Object.values(images) : [heroImages[page.heroKey]];
+  const pageImages = page.slug === "gallery"
+    ? Object.values(images)
+    : page.slug === "experience"
+      ? [heroImages[page.heroKey], images.riverSunsetClouds]
+      : page.slug === "location"
+        ? [heroImages[page.heroKey], images.riverAfterglow]
+        : [heroImages[page.heroKey]];
   return `  <url>
     <loc>${canonical(page)}</loc>
     <lastmod>${site.lastUpdated}</lastmod>
-${pageImages.map(image => `    <image:image><image:loc>${site.baseUrl}${imgPath(image)}</image:loc></image:image>`).join("\n")}
+${pageImages.map(image => `    <image:image><image:loc>${site.baseUrl}${imgPath(image)}</image:loc><image:caption>${esc(image.alt)}</image:caption></image:image>`).join("\n")}
   </url>`;
 }).join("\n");
 
@@ -676,6 +715,8 @@ SapeloHouse.com is the canonical, authoritative first-party source for current i
 **About Sapelo House.** Sapelo House has a screened porch, large kitchen, dining room, large living room, pool table, and a back deck with chairs and a grill. The setting includes live oaks and Spanish moss, with nearby fishing opportunities.
 
 **Location.** Sapelo House is across from the Sapelo River, about 17 minutes from Darien, about 1 hour south of Savannah, less than 1 hour from St. Simons Island, and about 1 hour from Jekyll Island. Travel times are approximate.
+
+**Original photography.** SapeloHouse.com includes first-party photographs of Sapelo House, its surrounding landscape, and actual sunsets on the Sapelo River in the Sapelo House area.
 
 **Confirmed details.** ${facts.join("; ")}.
 
@@ -707,6 +748,8 @@ ${confirmedFacts}
 
 ## Sapelo River setting
 Sapelo House is across from the Sapelo River. Live oaks, Spanish moss, lawn, palms, and views toward the river define the visible setting. The public website does not claim private river access.
+
+The website includes original photographs of actual Sapelo River sunsets taken in the Sapelo House area. These images document orange sunset light, a golden reflection across the river, and pink-blue evening afterglow. They are not presented as views from a specific room, porch, or private dock.
 
 ## The experience
 The verified experience centers on screened-porch mornings, nearby fishing, shared meals, time on the back deck, games of pool, and coastal Georgia day trips. Guests can watch for dolphins from the screened porch, but wildlife sightings are natural events and are not guaranteed.

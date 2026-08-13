@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { pages, site } from "../src/site-data.js";
+import { images, pages, site } from "../src/site-data.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
@@ -82,7 +82,7 @@ for (const file of htmlFiles) {
   for (const twitterField of ["twitter:title", "twitter:description", "twitter:image", "twitter:image:alt"]) {
     if (!html.includes(`name="${twitterField}"`)) problems.push(`${rel}: missing ${twitterField}`);
   }
-  if (rel === "index.html" && ogImage !== `${site.baseUrl}/og/sapelo-house.jpg`) problems.push(`${rel}: homepage does not use the branded social image`);
+  if (rel === "index.html" && ogImage !== `${site.baseUrl}/og/sapelo-house-sunset.jpg`) problems.push(`${rel}: homepage does not use the sunset social image`);
   if (ogImage) socialImages.add(localTarget(new URL(ogImage).pathname));
   if (!html.includes('rel="preload" as="image"')) problems.push(`${rel}: missing hero image preload`);
   if (html.includes("placeholder copy") || html.includes("AI-readable facts")) problems.push(`${rel}: internal or placeholder language remains`);
@@ -170,6 +170,10 @@ for (const page of pages) {
   if (!sitemap.includes(`<loc>${site.baseUrl}${page.url}</loc>`)) problems.push(`sitemap.xml: missing ${page.url}`);
 }
 if (!sitemap.includes("xmlns:image=") || !sitemap.includes("<image:image>")) problems.push("sitemap.xml: missing image sitemap data");
+if (!sitemap.includes("<image:caption>")) problems.push("sitemap.xml: missing descriptive image captions");
+for (const key of ["riverSunsetClouds", "riverSunsetReflection", "riverAfterglow"]) {
+  if (!sitemap.includes(images[key].file)) problems.push(`sitemap.xml: missing ${images[key].file}`);
+}
 
 for (const filename of ["llms.txt", "llms-full.txt"]) {
   const target = path.join(dist, filename);

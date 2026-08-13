@@ -34,3 +34,6 @@ SEO-friendly WebP filenames and ready-to-use alt text for the Sapelo House vacat
 | `images/sapelo-house-riverfront-yard-live-oaks.webp` | Riverfront yard at Sapelo House with live oak trees, Spanish moss, palms, and a view toward the Sapelo River. |
 | `images/sapelo-house-sapelo-river-through-spanish-moss.webp` | Sapelo River scenery from Sapelo House, framed by Spanish moss and mature coastal trees. |
 | `images/sapelo-house-side-yard-live-oaks-exterior.webp` | Side yard view of Sapelo House with live oak trees, Spanish moss, and a sunny lawn. |
+| `images/sapelo-river-orange-sunset-clouds-coastal-georgia.webp` | Orange sunset over the Sapelo River with dramatic clouds and a dock in the foreground in coastal Georgia. |
+| `images/sapelo-river-golden-sunset-dock-coastal-georgia.webp` | Sun setting beyond the marsh across the Sapelo River with a golden reflection on the water and a dock in the foreground. |
+| `images/sapelo-river-pink-blue-evening-sky-coastal-georgia.webp` | Pink and blue evening sky over the Sapelo River after sunset in coastal Georgia. |
