@@ -5,6 +5,7 @@ import { pages, site } from "../src/site-data.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
+const pagesBasePath = (process.env.PAGES_BASE_PATH || "").replace(/\/$/, "");
 const htmlFiles = [];
 const problems = [];
 const titles = new Map();
@@ -19,7 +20,10 @@ function walk(dir) {
 }
 
 function localTarget(url) {
-  const clean = url.split(/[?#]/)[0].replace(/^\//, "");
+  const withoutBasePath = pagesBasePath && url.startsWith(`${pagesBasePath}/`)
+    ? url.slice(pagesBasePath.length)
+    : url;
+  const clean = withoutBasePath.split(/[?#]/)[0].replace(/^\//, "");
   if (!clean) return path.join(dist, "index.html");
   if (path.extname(clean)) return path.join(dist, clean);
   return path.join(dist, clean, "index.html");

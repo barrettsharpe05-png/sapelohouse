@@ -10,6 +10,7 @@ const imageSource = path.join(root, "public", "sapelo-house-webp-seo", "images")
 const imageDest = path.join(dist, "images");
 const socialSource = path.join(root, "public", "og");
 const socialDest = path.join(dist, "og");
+const pagesBasePath = (process.env.PAGES_BASE_PATH || "").replace(/\/$/, "");
 const portraitImages = new Set([
   "sapelo-house-back-deck-outdoor-lounge.webp",
   "sapelo-house-bedroom-tv-armoire-reading-chair.webp",
@@ -53,6 +54,14 @@ const pageOut = page => page.slug === "index" ? path.join(dist, "index.html") : 
 const canonical = page => `${site.baseUrl}${page.url === "/" ? "/" : page.url}`;
 const active = (page, href) => page.url === href ? ' aria-current="page"' : "";
 const socialImagePath = page => `/og/${page.slug === "index" ? "home" : page.slug}.jpg`;
+const applyPagesBasePath = html => pagesBasePath
+  ? html
+      .replaceAll('href="/', `href="${pagesBasePath}/`)
+      .replaceAll('src="/', `src="${pagesBasePath}/`)
+      .replaceAll('srcset="/', `srcset="${pagesBasePath}/`)
+      .replaceAll(", /images/", `, ${pagesBasePath}/images/`)
+      .replaceAll("url('/images/", `url('${pagesBasePath}/images/`)
+  : html;
 
 const pageTopics = page => ({
   index: ["Sapelo House", "coastal Georgia vacation rental", "Sapelo River vacation rental", "Darien Georgia vacation rental"],
@@ -546,7 +555,7 @@ ${header(page)}
 ${hero(page)}
 ${bodies[page.body]()}
 ${footer()}`;
-  fs.writeFileSync(out, html);
+  fs.writeFileSync(out, applyPagesBasePath(html));
 }
 
 fs.writeFileSync(
