@@ -353,7 +353,6 @@ export const pages = [
     h1: "Tell Us When You Are Thinking About Coming.",
     intro:
       "If you already have dates in mind, send a text. If you are still figuring them out, send one anyway. A direct conversation is the simplest way to learn what is available and ask the questions that matter to your stay.",
-    ctas: [["Ask About Your Dates", "/booking/", "primary"]],
     highlights: ["Ask about availability", "Share desired dates", "Bring your stay questions"],
     body: "booking"
   },
