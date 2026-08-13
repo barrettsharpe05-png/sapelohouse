@@ -7,7 +7,7 @@ export const site = {
   locale: "en_US",
   lastUpdated: "2026-08-13",
   description:
-    "Sapelo House is a peaceful coastal Georgia vacation rental across from the Sapelo River, shaped by screened-porch mornings, nearby fishing, coastal adventures, and time together.",
+    "Sapelo House is a coastal Georgia vacation rental across from the Sapelo River near Darien, with a screened porch, shared gathering spaces, nearby fishing, and easy coastal day trips.",
   imageBase,
   nav: [
     ["Home", "/"],
@@ -261,12 +261,14 @@ export const pages = [
     title: "Sapelo House | A Peaceful Coastal Georgia Escape Near the Sapelo River",
     description:
       "Escape to Sapelo House, a peaceful coastal Georgia vacation rental across from the Sapelo River, where screened-porch mornings, moss-draped live oaks, nearby fishing, and unforgettable coastal day trips set the rhythm.",
-    ogTitle: "Sapelo House | Come Experience the Quiet Side of Coastal Georgia",
+    ogTitle: "Sapelo House | A Different Pace of Coastal Georgia",
     ogDescription:
-      "Across from the Sapelo River, beneath ancient-looking live oaks and Spanish moss, Sapelo House is the kind of coastal Georgia escape that invites you to slow down, reconnect, and stay awhile.",
-    twitterTitle: "Sapelo House | A Coastal Georgia Escape Near the Sapelo River",
+      "A peaceful coastal Georgia vacation rental across from the Sapelo River, surrounded by live oaks, Spanish moss, porch mornings, nearby fishing, and easy coastal adventures.",
+    twitterTitle: "Sapelo House | A Different Pace of Coastal Georgia",
     twitterDescription:
-      "Porch mornings. Spanish moss. Nearby fishing. Long conversations. Easy adventures to Darien, Savannah, St. Simons and Jekyll. Welcome to Sapelo House.",
+      "A peaceful coastal Georgia vacation rental across from the Sapelo River, with live oaks, Spanish moss, porch mornings, nearby fishing, and easy coastal adventures.",
+    socialImage: "/og/sapelo-house.jpg",
+    socialImageAlt: "Sapelo House social card showing the Sapelo River through live oaks and Spanish moss with the words A Different Pace of Coastal Georgia.",
     eyebrow: "A Different Side of Coastal Georgia",
     h1: "Come Wake Up Where the World Feels a Little Farther Away.",
     intro: [
@@ -289,6 +291,8 @@ export const pages = [
     title: "The House | Life at Sapelo House on the Georgia Coast",
     description:
       "Step inside Sapelo House, where a screened porch, gathering kitchen, comfortable living spaces, pool table, and back deck shape unhurried coastal days.",
+    ogTitle: "The House | Gather and Unwind at Sapelo House",
+    ogDescription: "See the screened porch, large kitchen, living spaces, pool table, back deck, bedrooms, baths, and gathering areas at Sapelo House.",
     eyebrow: "Inside Sapelo House",
     h1: "Enough Room to Spread Out. Enough Reasons to End Up Together.",
     intro:
@@ -304,6 +308,8 @@ export const pages = [
     title: "The Experience | A Day Near the Sapelo River",
     description:
       "Follow a day at Sapelo House from quiet screened-porch mornings and fishing near the Sapelo River to coastal day trips, deck dinners, and late pool games.",
+    ogTitle: "The Experience | A Day at Sapelo House",
+    ogDescription: "Porch coffee, nearby fishing, coastal Georgia day trips, dinner on the back deck, and pool games shape an unhurried stay at Sapelo House.",
     eyebrow: "The Sapelo House Experience",
     h1: "Coffee First. Plans Later.",
     intro:
@@ -319,6 +325,8 @@ export const pages = [
     title: "Location | Sapelo House Near Darien and the Sapelo River",
     description:
       "Stay across from the Sapelo River with Darien about 17 minutes away and Savannah, St. Simons Island, and Jekyll Island within reach for coastal day trips.",
+    ogTitle: "Location | Sapelo House Near Darien and the Sapelo River",
+    ogDescription: "Stay across from the Sapelo River, about 17 minutes from Darien, with Savannah, St. Simons Island, and Jekyll Island within reach.",
     eyebrow: "A Different Corner of the Georgia Coast",
     h1: "Close Enough to Explore. Far Enough Away to Exhale.",
     intro:
@@ -334,6 +342,8 @@ export const pages = [
     title: "Gallery | See Sapelo House and Its Coastal Georgia Setting",
     description:
       "See Sapelo House through its river setting, screened porch, deck, kitchen, gathering spaces, pool table, bedrooms, baths, and moss-draped coastal landscape.",
+    ogTitle: "Gallery | See Sapelo House and Its Coastal Setting",
+    ogDescription: "Explore authentic photographs of Sapelo House, its Sapelo River setting, screened porch, deck, kitchen, living spaces, bedrooms, and baths.",
     eyebrow: "See Sapelo House",
     h1: "Look for the Life Between the Rooms.",
     intro:
@@ -349,6 +359,8 @@ export const pages = [
     title: "Ask About Dates | Book a Stay at Sapelo House",
     description:
       "Text Sapelo House directly to ask about available dates for a coastal Georgia stay near the Sapelo River, Darien, St. Simons Island, Jekyll Island, and Savannah.",
+    ogTitle: "Reserve Sapelo House | Ask About Available Dates",
+    ogDescription: "Contact Sapelo House directly to ask about available dates and the details that matter for your coastal Georgia stay.",
     eyebrow: "Come Stay Awhile",
     h1: "Tell Us When You Are Thinking About Coming.",
     intro:
@@ -364,6 +376,8 @@ export const pages = [
     title: "FAQ | Planning a Stay at Sapelo House",
     description:
       "Find clear answers about Sapelo House, its Sapelo River setting, screened porch, nearby fishing, shared spaces, coastal Georgia travel times, and booking inquiries.",
+    ogTitle: "Sapelo House FAQ | Plan Your Coastal Georgia Stay",
+    ogDescription: "Find clear answers about Sapelo House, its Sapelo River setting, confirmed spaces, nearby fishing, coastal travel times, and reservation inquiries.",
     eyebrow: "Planning Your Stay",
     h1: "The Questions You Ask Before You Start Packing.",
     intro:
