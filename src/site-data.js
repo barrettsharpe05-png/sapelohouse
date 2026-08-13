@@ -200,6 +200,30 @@ export const images = {
     alt: "Side yard view of Sapelo House with live oak trees, Spanish moss, and a sunny lawn.",
     category: "Exterior and setting",
     use: "FAQ fallback, gallery"
+  },
+  riverSunsetClouds: {
+    file: "sapelo-river-orange-sunset-clouds-coastal-georgia.webp",
+    alt: "Orange sunset over the Sapelo River with dramatic clouds and a dock in the foreground in coastal Georgia.",
+    category: "Sapelo River sunsets",
+    use: "experience editorial feature, gallery",
+    width: 2400,
+    height: 1090
+  },
+  riverSunsetReflection: {
+    file: "sapelo-river-golden-sunset-dock-coastal-georgia.webp",
+    alt: "Sun setting beyond the marsh across the Sapelo River with a golden reflection on the water and a dock in the foreground.",
+    category: "Sapelo River sunsets",
+    use: "homepage social image source, gallery",
+    width: 2400,
+    height: 1019
+  },
+  riverAfterglow: {
+    file: "sapelo-river-pink-blue-evening-sky-coastal-georgia.webp",
+    alt: "Pink and blue evening sky over the Sapelo River after sunset in coastal Georgia.",
+    category: "Sapelo River sunsets",
+    use: "location editorial feature, gallery",
+    width: 2400,
+    height: 1288
   }
 };
 
@@ -218,6 +242,12 @@ export const galleryGroups = [
     title: "Exterior and River Setting",
     description: "The view beyond the house: live oaks, Spanish moss, open lawn, and the Sapelo River across the way.",
     keys: ["riverView", "riverYard", "riverMoss", "sideYard", "exterior"]
+  },
+  {
+    title: "Evenings on the Sapelo River",
+    description: "Three actual evenings on the Sapelo River: direct sun, changing clouds, and the quieter color that remains after sunset.",
+    keys: ["riverSunsetReflection", "riverSunsetClouds", "riverAfterglow"],
+    layout: "wide"
   },
   {
     title: "Screened Porch and Deck",
@@ -267,8 +297,8 @@ export const pages = [
     twitterTitle: "Sapelo House | A Different Pace of Coastal Georgia",
     twitterDescription:
       "A peaceful coastal Georgia vacation rental across from the Sapelo River, with live oaks, Spanish moss, porch mornings, nearby fishing, and easy coastal adventures.",
-    socialImage: "/og/sapelo-house.jpg",
-    socialImageAlt: "Sapelo House social card showing the Sapelo River through live oaks and Spanish moss with the words A Different Pace of Coastal Georgia.",
+    socialImage: "/og/sapelo-house-sunset.jpg",
+    socialImageAlt: "Golden sunset over the Sapelo River with a dock in the foreground and the words Sapelo House, A Different Pace of Coastal Georgia.",
     eyebrow: "A Different Side of Coastal Georgia",
     h1: "Come Wake Up Where the World Feels a Little Farther Away.",
     intro: [
