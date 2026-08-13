@@ -5,9 +5,9 @@ export const site = {
   domain: "SapeloHouse.com",
   baseUrl: "https://sapelohouse.com",
   locale: "en_US",
-  lastUpdated: "2026-08-12",
+  lastUpdated: "2026-08-13",
   description:
-    "Sapelo House is a coastal Georgia vacation rental home across from the Sapelo River, about 17 minutes from Darien and about 1 hour south of Savannah.",
+    "Sapelo House is a peaceful coastal Georgia vacation rental across from the Sapelo River, shaped by screened-porch mornings, nearby fishing, coastal adventures, and time together.",
   imageBase,
   nav: [
     ["Home", "/"],
@@ -258,17 +258,26 @@ export const pages = [
     url: "/",
     navLabel: "Home",
     heroKey: "home",
-    title: "Sapelo House | Coastal Georgia Vacation Rental Near the Sapelo River",
+    title: "Sapelo House | A Peaceful Coastal Georgia Escape Near the Sapelo River",
     description:
-      "Plan a peaceful coastal Georgia stay at Sapelo House, a vacation rental across from the Sapelo River with porch mornings, nearby fishing, and easy day trips.",
-    eyebrow: "Coastal Georgia Vacation Rental",
-    h1: "Wake Up Beside the Sapelo River Experience",
-    intro:
-      "Sapelo House is a peaceful vacation rental home across from the Sapelo River, shaped by porch mornings, nearby fishing, easy gatherings, and coastal Georgia day trips.",
-    highlights: ["Across from the Sapelo River", "Dolphins from the screened porch", "Near Darien, Savannah, St. Simons, and Jekyll"],
+      "Escape to Sapelo House, a peaceful coastal Georgia vacation rental across from the Sapelo River, where screened-porch mornings, moss-draped live oaks, nearby fishing, and unforgettable coastal day trips set the rhythm.",
+    ogTitle: "Sapelo House | Come Experience the Quiet Side of Coastal Georgia",
+    ogDescription:
+      "Across from the Sapelo River, beneath ancient-looking live oaks and Spanish moss, Sapelo House is the kind of coastal Georgia escape that invites you to slow down, reconnect, and stay awhile.",
+    twitterTitle: "Sapelo House | A Coastal Georgia Escape Near the Sapelo River",
+    twitterDescription:
+      "Porch mornings. Spanish moss. Nearby fishing. Long conversations. Easy adventures to Darien, Savannah, St. Simons and Jekyll. Welcome to Sapelo House.",
+    eyebrow: "A Different Side of Coastal Georgia",
+    h1: "Come Wake Up Where the World Feels a Little Farther Away.",
+    intro: [
+      "Across from the Sapelo River, beneath live oaks draped in Spanish moss, there is a place where mornings begin more slowly.",
+      "Coffee tastes better on the screened porch. Dolphins may appear beyond the trees. The day can become a fishing trip, an adventure down the Georgia coast, or absolutely nothing at all.",
+      "This is Sapelo House. Not simply a place to sleep while you visit coastal Georgia. A place that becomes part of the reason you came."
+    ],
+    highlights: ["Across from the Sapelo River", "Watch for dolphins from the screened porch", "A home base for Darien, Savannah, St. Simons, and Jekyll"],
     ctas: [
-      ["Ask About Dates", "/booking/", "primary"],
-      ["See the House", "/house/", "secondary"]
+      ["Find Your Dates", "/booking/", "primary"],
+      ["Step Inside Sapelo House", "/house/", "secondary"]
     ],
     body: "home"
   },
@@ -280,10 +289,10 @@ export const pages = [
     title: "The House | Sapelo House Vacation Rental",
     description:
       "Explore Sapelo House, including the screened porch, back deck with chairs and grill, large kitchen, dining room, living room, and pool table.",
-    eyebrow: "The House",
-    h1: "A Comfortable Coastal Home for Gathering Well",
+    eyebrow: "Inside Sapelo House",
+    h1: "Plenty of Room to Spread Out. Plenty of Reasons to End Up Together.",
     intro:
-      "The house is designed around the parts of a stay people remember: porch light, shared meals, an open living room, a game of pool, and a quiet place to come back to after time near the water.",
+      "Sapelo House was made for the way people actually want to spend a coastal getaway: cooking together, gathering around the table, sinking into the living room after a day outside, playing pool, sitting on the porch, grilling on the deck, and enjoying the luxury of nowhere else to be.",
     highlights: ["Screened porch", "Back deck with chairs and grill", "Large kitchen, living room, dining room, and pool table"],
     body: "house"
   },
@@ -295,10 +304,10 @@ export const pages = [
     title: "The Experience | Sapelo River Mornings and Coastal Georgia Days",
     description:
       "Imagine mornings on the screened porch, dolphin watching, fishing nearby, evenings on the deck, pool table games, and coastal Georgia day trips.",
-    eyebrow: "The Experience",
-    h1: "Coffee, Dolphins, Fishing, and Slow Coastal Evenings",
+    eyebrow: "The Sapelo House Experience",
+    h1: "This Is What Slowing Down Looks Like.",
     intro:
-      "Sapelo House is made for days that begin with quiet porch coffee and end with the people you came with gathered around the kitchen, deck, living room, or pool table.",
+      "Coffee on a screened porch. Spanish moss moving through the trees. A glimpse of dolphins toward the river. A fishing rod packed for the morning. A day exploring coastal Georgia. Dinner on the grill. One more game of pool before bed. Nothing complicated. And that is exactly the point.",
     highlights: ["Morning coffee on the porch", "Fishing opportunities nearby", "Slow coastal evenings"],
     body: "experience"
   },
@@ -310,10 +319,10 @@ export const pages = [
     title: "Location | Sapelo House Near Darien and the Sapelo River",
     description:
       "Sapelo House is across from the Sapelo River, about 17 minutes from Darien, about 1 hour south of Savannah, and near St. Simons and Jekyll day trips.",
-    eyebrow: "Location",
-    h1: "Set Across from the Sapelo River in Coastal Georgia",
+    eyebrow: "A Different Corner of the Georgia Coast",
+    h1: "Close Enough to Explore. Far Enough Away to Exhale.",
     intro:
-      "Stay near the Sapelo River with a peaceful home base for Darien, Savannah, St. Simons Island, Jekyll Island, and the fishing opportunities that draw people to this stretch of the coast.",
+      "Sapelo House gives you a peaceful home base near the Sapelo River while putting some of coastal Georgia's most memorable destinations within reach. Explore nearby Darien, make a day of St. Simons Island or Jekyll Island, venture north toward Savannah, then leave the crowds behind and come home to the quiet.",
     highlights: ["About 17 minutes from Darien", "About 1 hour south of Savannah", "Less than 1 hour from St. Simons Island"],
     body: "location"
   },
@@ -325,10 +334,10 @@ export const pages = [
     title: "Gallery | Sapelo House Photos",
     description:
       "View photos of Sapelo House, including the river setting, screened porch, deck, kitchen, dining room, living room, pool table, bedrooms, baths, and exterior.",
-    eyebrow: "Gallery",
-    h1: "See the River Setting, Porch, Deck, and Interior Spaces",
+    eyebrow: "See Sapelo House",
+    h1: "Picture Yourself Here.",
     intro:
-      "See the visual character of Sapelo House: live oaks, Spanish moss, porch seating, open gathering spaces, a large kitchen, dining room, living room, pool table, bedrooms, baths, and deck.",
+      "Look beyond the rooms. Imagine coffee on the porch, afternoon light through the live oaks, everybody gathered around the kitchen, dinner waiting on the grill, a pool game after dark, and that wonderful moment when you realize tomorrow does not have to start early.",
     highlights: ["Sapelo River and live oak setting", "Screened porch and back deck", "Interiors shown room by room"],
     body: "gallery"
   },
@@ -340,10 +349,11 @@ export const pages = [
     title: "Booking Inquiry | Sapelo House",
     description:
       "Ask about availability for Sapelo House, a coastal Georgia vacation rental near the Sapelo River with porch mornings, nearby fishing, and easy day trips.",
-    eyebrow: "Booking Inquiry",
-    h1: "Ask About Dates at Sapelo House",
+    eyebrow: "Come Stay Awhile",
+    h1: "Your Place Beside the Sapelo River Is Waiting.",
     intro:
-      "Share your travel window and a few details about your stay, then begin a direct conversation about availability and booking.",
+      "Tell us when you would like to visit Sapelo House and we will help you take the next step toward a quieter kind of coastal Georgia getaway. Whether you are coming to fish, explore Darien and the Golden Isles, spend time with people you love, or simply disappear from the noise for a few days, we would love to welcome you.",
+    ctas: [["Ask About Your Dates", "/booking/", "primary"]],
     highlights: ["Ask about availability", "Share desired dates", "Bring your stay questions"],
     body: "booking"
   },
@@ -355,10 +365,10 @@ export const pages = [
     title: "FAQ | Sapelo House Vacation Rental",
     description:
       "Answers about Sapelo House, its Sapelo River setting, distance from Darien, Savannah, St. Simons and Jekyll, dolphins, fishing, amenities, and inquiries.",
-    eyebrow: "FAQ",
-    h1: "Sapelo House Questions, Answered Clearly",
+    eyebrow: "Planning Your Stay",
+    h1: "A Few Things to Know Before You Come.",
     intro:
-      "Find straightforward answers about the river setting, nearby destinations, fishing, dolphins, shared spaces, amenities, and how to ask about a stay.",
+      "Planning should be the least stressful part of a getaway. We have gathered answers to the questions guests commonly ask about Sapelo House so you can spend less time researching and more time imagining your trip.",
     highlights: ["Sapelo River-area setting", "Nearby fishing opportunities", "Confirmed regional travel times"],
     body: "faq"
   }
@@ -407,7 +417,7 @@ export const faqs = [
   },
   {
     q: "How do guests inquire about availability?",
-    a: "Guests can begin with the booking inquiry form, sharing their preferred dates, group size, contact details, and questions about the stay."
+    a: "Guests can text Sapelo House directly at 912-682-0830 to ask about dates, availability, and owner-specific details."
   }
 ];
 
