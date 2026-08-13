@@ -285,6 +285,50 @@ function sensoryBand(title, copy, items) {
   </section>`;
 }
 
+function bookingInvitation(eyebrow, title, copy, label = "Ask About My Dates") {
+  return `<section class="section booking-cta-band">
+    <div class="container booking-cta-inner">
+      <p class="eyebrow">${esc(eyebrow)}</p>
+      <h2>${esc(title)}</h2>
+      <p>${esc(copy)}</p>
+      <div class="button-row">${textCta(label, "primary")}</div>
+    </div>
+  </section>`;
+}
+
+const galleryCaptions = {
+  riverView: "The Sapelo River across the way, framed by the trees that set the pace here.",
+  riverYard: "A long view through live oaks, palms, and Spanish moss toward the river.",
+  riverMoss: "Spanish moss, still water, and a horizon that asks nothing of you.",
+  sideYard: "The side lawn beneath mature live oaks.",
+  exterior: "Sapelo House, waiting at the end of a coastal Georgia day.",
+  porchSeating: "A shaded seat for the first cup of coffee or the last conversation of the evening.",
+  frontPorch: "The covered porch, where a slow morning can stay slow.",
+  screenedEntry: "The screened entry between the house and the coastal air outside.",
+  backDeck: "The back deck: chairs, a grill, and no dinner reservation required.",
+  coveredBackDeck: "Covered outdoor seating for the part of the evening nobody wants to end.",
+  kitchenIsland: "The kitchen island, where plans are made and changed over breakfast.",
+  kitchenOpen: "An open kitchen that keeps the cook in the conversation.",
+  kitchenWhite: "White cabinetry, warm wood, and room to make more than a quick meal.",
+  dining: "The dining table, ready for breakfast, dinner, or one more story before everyone gets up.",
+  livingPool: "Living space and pool table within easy reach of each other.",
+  sectional: "A generous sectional for the quiet hour after a day out.",
+  livingSeating: "Comfortable seating when nobody feels like going anywhere else.",
+  openConcept: "Kitchen, dining, living, and play all sharing the same easy rhythm.",
+  openLivingKitchen: "The gathering spaces flow together, so people tend to do the same.",
+  poolTableFireplace: "The pool table, where the person who does not really play may suddenly care very much about winning.",
+  primaryBedroom: "A calm room waiting at the end of a full day.",
+  primaryBedroomSitting: "A bedroom sitting area with soft window light.",
+  bedroomArmoire: "A reading chair and quiet corner away from the shared rooms.",
+  guestBedroomDresser: "A guest bedroom with warm wood tones and simple comfort.",
+  guestBedroomTv: "A guest room with its own place to settle in.",
+  brightBedroom: "Morning light in one of the guest bedrooms.",
+  primaryBathVanity: "A double vanity and soaking tub in the primary bathroom.",
+  primaryBathTub: "The primary bath with tub, walk-in shower, and storage.",
+  guestBath: "A guest bathroom with clean coastal details.",
+  laundry: "A full-size washer and dryer for the practical side of a longer stay."
+};
+
 function homeBody() {
   return `<main id="main">
   <section class="section intro-section">
@@ -362,20 +406,24 @@ function homeBody() {
 
 function houseBody() {
   const cards = [
-    ["frontPorch", "Screened porch", "A shaded porch space anchors the morning experience, including the confirmed opportunity to watch dolphins."],
-    ["backDeck", "Back deck with grill", "The photos show a back deck with outdoor seating and a grill for relaxed coastal evenings."],
-    ["sectional", "Large living room", "The living room photos show generous seating and an open layout for gathering."],
-    ["kitchenIsland", "Large kitchen", "White cabinetry, stainless appliances, and an island are visible in the kitchen photos."],
-    ["dining", "Dining room", "A dedicated dining room sits near the kitchen for shared meals."],
-    ["poolTableFireplace", "Pool table", "The pool table creates an easy evening activity after days near the river or coast."]
+    ["frontPorch", "Coffee Before Everyone Wakes Up", "The screened porch earns its place in the day early. Bring out a mug, listen before the house stirs, look toward the Sapelo River, and watch for dolphins beyond the trees."],
+    ["kitchenIsland", "The Room Everyone Finds Eventually", "Breakfast begins here. So do conversations about fishing, Darien, the islands, and whether anyone actually wants a plan. The island keeps whoever is cooking close to all of it."],
+    ["dining", "Stay at the Table a Little Longer", "The dining room gives shared meals their own place. Nobody needs the table back in ninety minutes. There is time for another helping and the story someone forgot to finish."],
+    ["sectional", "A Soft Place to Land", "After a day near the water or out along the Georgia coast, the large living room asks very little: drop what you are carrying, choose a seat, and let the house become home base again."],
+    ["poolTableFireplace", "One More Game Before Bed", "The pool table changes the energy. One game becomes five. The person who said they do not really play begins studying every angle. Bedtime quietly loses the argument."],
+    ["backDeck", "Dinner Does Not Need a Reservation", "The back deck has chairs and a grill, which is sometimes all an evening needs. Food cooks outside. Conversation carries on. Nobody is waiting to turn the table."]
   ];
   return `<main id="main">
   <section class="section intro-section">
     <div class="container feature reverse">
       <div class="feature-copy">
-        <p class="eyebrow">First impression</p>
-        <h2>Plainspoken comfort, framed by coastal light and outdoor rooms.</h2>
-        <p>The home centers the spaces that make a shared stay comfortable: porch seating, a back deck, a large living room, a large kitchen, a dining room, and a pool table.</p>
+        <p class="eyebrow">Arrive and settle in</p>
+        <h2>The house reveals itself through the way people use it.</h2>
+        <div class="story-copy compact">${paragraphs([
+          "At first, you notice the setting. The live oaks. Spanish moss. The sense that the Sapelo River is part of the day even when you are still unpacking.",
+          "Then the house begins doing what a good vacation house should. Bags disappear into bedrooms. Someone opens the porch door. Somebody else finds the kitchen. Before long, people have spread out without feeling separated.",
+          "That balance matters here. There are quiet corners when you want one and shared rooms that make being together feel unplanned."
+        ])}</div>
       </div>
       <div class="wide-photo-feature">
         ${imagePanel("exterior", "Front exterior of Sapelo House")}
@@ -384,94 +432,95 @@ function houseBody() {
   </section>
   <section class="section">
     <div class="container section-heading">
-      <div><p class="eyebrow">Photo-led tour</p><h2>The house keeps the stay grounded in shared spaces.</h2></div>
-      <p>Explore the rooms and outdoor spaces that shape daily life at Sapelo House, shown through the real property photography.</p>
+      <div><p class="eyebrow">A day inside the house</p><h2>Every room has a practical purpose. The good ones become something more.</h2></div>
+      <p>A porch becomes the place you go before breakfast. A kitchen becomes command central. A pool table becomes the reason everyone is still awake.</p>
     </div>
     <div class="container card-grid house-tour-grid">${cards.map(([key, title, copy]) => proofCard(key, title, copy)).join("")}</div>
   </section>
   <section class="section dark-band">
     <div class="container feature reverse">
       <div class="feature-copy">
-        <p class="eyebrow">Inside and outside</p>
-        <h2>Move naturally from kitchen to living room to porch to deck.</h2>
-        <p>Warm floors, comfortable seating, natural light, and outdoor places to sit in the shade or near the grill give the home its relaxed coastal character.</p>
+        <p class="eyebrow">When the day winds down</p>
+        <h2>The bedrooms wait quietly beyond the shared rooms.</h2>
+        <p>Eventually the pool game ends. The kitchen gets quieter. People peel away toward bedrooms and baths, tired in the satisfying way that follows a day outside. Laundry is there when a longer stay calls for it. Tomorrow can begin on the porch all over again.</p>
       </div>
       <div class="feature-image">${imageTag(images.openConcept)}</div>
     </div>
   </section>
+  ${bookingInvitation("Come See How It Feels", "The house makes more sense once everyone is in it.", "If Sapelo House feels like the right setting for your people, ask about the dates you have in mind.", "Ask About My Dates")}
 </main>`;
 }
 
 function experienceBody() {
-  const items = [
-    "Morning coffee on the screened porch",
-    "Watching dolphins from the screened porch",
-    "Fishing opportunities nearby",
-    "Slow coastal evenings on the back deck",
-    "Playing pool after a day outside",
-    "Cooking and dining together",
-    "Day trips to Darien, Savannah, St. Simons Island, and Jekyll Island"
-  ];
   return `<main id="main">
-  ${sensoryBand("A stay designed around unforced moments.", "Think dolphins from the screened porch, nearby fishing, easy day trips, shared meals, deck evenings, and games around the pool table.", [
-    ["Porch", "Wake slowly and look toward the Sapelo River experience."],
-    ["Water", "Use the house as a calm base for nearby fishing opportunities."],
-    ["Together", "Cook, dine, sit outside, and play pool without leaving the house."]
+  ${sensoryBand("The day has room to become whatever it becomes.", "There is no single correct way to spend a day at Sapelo House. The pleasure is having several good choices and no pressure to choose quickly.", [
+    ["Early", "The first sound may be the porch door. Coffee follows. Through the live oaks and Spanish moss, the Sapelo River comes slowly into view. Watch for dolphins. Let everyone else sleep."],
+    ["Later", "Fishing may pull you out early. Darien may be the plan. St. Simons Island, Jekyll Island, or Savannah may claim the day. Staying put remains a perfectly respectable decision."],
+    ["Home", "Whatever happened out there, coming back is part of the pleasure: shoes off, something cold to drink, one person drifting toward the kitchen and another toward a chair outside."]
   ])}
   <section class="section">
     <div class="container feature">
       <div class="feature-copy">
-        <p class="eyebrow">A slower kind of trip</p>
-        <h2>The experience is quiet, scenic, and built around real moments.</h2>
-        <p>The character of the stay comes from concrete details: a peaceful coastal setting, dolphins from the screened porch, nearby fishing, outdoor seating, a grill, a pool table, and generous gathering spaces.</p>
-        <ul class="quiet-list">${items.map(item => `<li>${esc(item)}</li>`).join("")}</ul>
+        <p class="eyebrow">The pleasure of coming back</p>
+        <h2>The best part of going out may be returning to the house.</h2>
+        <div class="story-copy compact">${paragraphs([
+          "Most trips are described by the places you leave the house to see. That leaves out something important.",
+          "It leaves out coming through the door after a day along the Georgia coast. Dropping everything. Hearing someone ask what is for dinner. Finding the light different on the deck than it was when you left.",
+          "Sapelo House becomes familiar quickly. By the second return, you already know where you want to sit."
+        ])}</div>
       </div>
       <div class="feature-image">${imageTag(images.riverYard)}</div>
     </div>
   </section>
   <section class="section band">
     <div class="container proof-grid photo-story-grid">
-      ${proofCard("frontPorch", "Evenings Outside", "Covered seating creates a shaded outdoor place to settle in.")}
-      ${proofCard("livingPool", "Games After Dinner", "The pool table gives guests a built-in activity without leaving the house.")}
-      ${proofCard("dining", "Meals Together", "The dining room and large kitchen support the simple rhythm of cooking and eating together.")}
+      ${proofCard("backDeck", "Dinner Moves Outside", "Put something on the grill and let the evening happen around it. There is no reservation time, no dress code, and no reason to leave when the conversation gets good.")}
+      ${proofCard("livingPool", "The Night Finds Its Own Entertainment", "After dinner, somebody suggests pool. Someone else says one game. This is how perfectly ordinary evenings become the part of a trip people keep retelling.")}
+      ${proofCard("frontPorch", "Tomorrow Can Wait Until Morning", "The day ends without the normal world pressing in. Sit outside a little longer. Make plans if you want them. Leave the next day open if you do not.")}
     </div>
   </section>
+  ${bookingInvitation("A Few Days at a Different Pace", "You do not need a full itinerary. You only need the dates.", "If this is how you want your next coastal Georgia getaway to feel, start the conversation with a text.", "See If My Dates Are Available")}
 </main>`;
 }
 
 function locationBody() {
   const locations = [
-    ["Darien, Georgia", "About 17 minutes from Sapelo House."],
-    ["Savannah, Georgia", "About 1 hour south of Savannah."],
-    ["St. Simons Island", "Less than 1 hour from Sapelo House."],
-    ["Jekyll Island", "About 1 hour from Sapelo House."]
+    ["Darien, Georgia", "About 17 minutes away, Darien is the nearest of the coastal destinations that can shape a day beyond the house."],
+    ["St. Simons Island", "Less than 1 hour away, close enough for an island day before returning to the quiet near the Sapelo River."],
+    ["Jekyll Island", "About 1 hour away, another direction the day can take when the coast is calling."],
+    ["Savannah, Georgia", "Sapelo House is about 1 hour south of Savannah, making the city possible without making it the setting of the entire stay."]
   ];
   return `<main id="main">
   <section class="section intro-section">
     <div class="container editorial-intro">
-      <p class="intro-kicker">Coastal Georgia context</p>
-      <h2>Close enough for day trips, quiet enough to feel apart from them.</h2>
-      <p>Sapelo House is across from the Sapelo River and within practical reach of Darien, Savannah, St. Simons Island, and Jekyll Island, giving travelers useful regional context for planning a stay.</p>
+      <p class="intro-kicker">The quiet side of the Georgia coast</p>
+      <h2>You can go find people when you want them. And come back to quiet when you have had enough.</h2>
+      <div class="story-copy">${paragraphs([
+        "Coastal Georgia changes character from one place to the next. A city day in Savannah feels different from an island day on St. Simons or Jekyll. Darien brings the scale back down. The roads between them pass through a landscape shaped by tidal water, live oaks, marsh, and sky.",
+        "Sapelo House offers a way to know several sides of that coast without sleeping in the middle of its busiest one.",
+        "Across from the Sapelo River, the house feels removed in the right way. Interesting places remain within reach. So does fishing near the river. But every outing ends with the road leading back to Spanish moss, porch chairs, and a quieter evening."
+      ])}</div>
     </div>
   </section>
   <section class="section">
     <div class="container feature">
       <div class="feature-copy">
-        <p class="eyebrow">Coastal Georgia base</p>
-        <h2>A peaceful Sapelo River-area stay with nearby coastal day trips.</h2>
-        <p>Sapelo House is located across from the Sapelo River in coastal Georgia. Regional travel times make it easy to understand the setting while the precise arrival details remain part of the booking process.</p>
-        <p>Guests can plan days around nearby fishing opportunities, Darien, Savannah, St. Simons Island, and Jekyll Island, then return to a quieter river-area setting.</p>
+        <p class="eyebrow">The Sapelo River setting</p>
+        <h2>The landscape changes the way the day feels.</h2>
+        <p>Live oaks and Spanish moss frame the view toward the Sapelo River. The water is across from the house, part of the setting rather than a promise of private access. It is enough to slow the eye down.</p>
+        <p>Fishing opportunities nearby give early risers a reason to leave before breakfast. Everyone else can take the morning at porch speed.</p>
       </div>
       <div class="feature-image">${imageTag(images.riverView)}</div>
     </div>
   </section>
   <section class="section dark-band">
     <div class="container section-heading">
-      <div><p class="eyebrow">Approximate distances</p><h2>A well-connected base for exploring the Georgia coast.</h2></div>
-      <p>Travel times are approximate and offer a practical starting point for planning coastal Georgia day trips.</p>
+      <div><p class="eyebrow">Choose a direction</p><h2>Four different coastal days, all within reach.</h2></div>
+      <p>Travel times are approximate. What matters more is the choice: go out when curiosity wins, then come back when quiet sounds better.</p>
     </div>
     <div class="container location-list">${locations.map(([title, copy]) => `<article><h2>${esc(title)}</h2><p>${esc(copy)}</p></article>`).join("")}</div>
   </section>
+  ${bookingInvitation("Your Coastal Georgia Base", "See the coast. Then leave the crowds behind.", "Ask about a stay near the Sapelo River, with Darien, the islands, Savannah, and nearby fishing ready when you want them.", "Start Planning My Stay")}
 </main>`;
 }
 
@@ -479,8 +528,8 @@ function galleryBody() {
   return `<main id="main">
   <section class="section">
     <div class="container section-heading">
-      <div><p class="eyebrow">The property in pictures</p><h2>Move from the river setting to the porch, deck, and shared rooms.</h2></div>
-      <p>Browse the real spaces in a natural sequence, from the landscape and outdoor rooms to the kitchen, living areas, bedrooms, baths, and recreation space.</p>
+      <div><p class="eyebrow">Look slowly</p><h2>Do not just look at the rooms. Look for the moments that might happen in them.</h2></div>
+      <p>The porch before breakfast. Everyone drifting toward the kitchen. Dinner outside. One last pool game. The quieter rooms after the day is done.</p>
     </div>
     <div class="container wide-photo-feature gallery-feature">
       ${imagePanel("riverView", "River view from the Sapelo House lawn")}
@@ -492,12 +541,13 @@ function galleryBody() {
         <div class="gallery-grid">
           ${group.keys.map(key => {
             const image = images[key];
-            return `<figure class="gallery-card">${imageTag(image, "(max-width: 860px) calc(100vw - 32px), 33vw")}<figcaption>${esc(image.alt)}</figcaption></figure>`;
+            return `<figure class="gallery-card">${imageTag(image, "(max-width: 860px) calc(100vw - 32px), 33vw")}<figcaption>${esc(galleryCaptions[key] || image.alt)}</figcaption></figure>`;
           }).join("")}
         </div>
       </section>`).join("")}
     </div>
   </section>
+  ${bookingInvitation("Seen Enough to Wonder", "The next picture could have your people in it.", "If the house and its setting feel right, ask whether your dates are still open.", "Ask About My Dates")}
 </main>`;
 }
 
@@ -505,28 +555,31 @@ function bookingBody() {
   return `<main id="main">
   <section class="section intro-section">
     <div class="container editorial-intro">
-      <p class="intro-kicker">Your Sapelo House Story</p>
-      <h2>A quieter kind of coastal Georgia getaway begins with a conversation.</h2>
-      <p>Whether you are coming to fish, explore Darien and the Golden Isles, spend time with people you love, or simply disappear from the noise for a few days, text us to ask about your dates.</p>
+      <p class="intro-kicker">The next step is simple</p>
+      <h2>You do not need to have the whole trip figured out.</h2>
+      <div class="story-copy">${paragraphs([
+        "Start with the dates you are considering. If they are flexible, say that. If you already know exactly when you want to come, say that too.",
+        "A text opens a direct conversation about availability and the practical details of the stay. No elaborate form. No pressure to make a decision before your questions are answered."
+      ])}</div>
     </div>
   </section>
   <section class="section">
     <div class="container contact-layout">
       <aside class="contact-panel">
-        <p class="eyebrow">Plan your stay</p>
-        <h2>Start with the dates. We will take it from there.</h2>
-        <p>A text opens a direct conversation about availability, your travel window, and the owner-specific details that matter before booking.</p>
+        <p class="eyebrow">What to include</p>
+        <h2>Tell us what you know so far.</h2>
+        <p>Your first text can be brief. The most useful details are the ones that help begin the right conversation.</p>
         <ul class="quiet-list">
-          <li>Ask about availability</li>
-          <li>Share desired dates and guest count</li>
-          <li>Ask owner-specific questions before booking</li>
+          <li>The dates or general travel window you are considering</li>
+          <li>How many people may be coming</li>
+          <li>Any questions that matter before you book</li>
         </ul>
       </aside>
       <div class="form-panel direct-text-panel">
         <p class="eyebrow">Text Sapelo House</p>
-        <h2>Ask about your dates directly.</h2>
-        <p>Your message will open prefilled on your device. Add preferred dates or questions before sending whenever you are ready.</p>
-        ${textCta("Text to Reserve Sapelo House", "dark")}
+        <h2>See if your dates are available.</h2>
+        <p>The button opens a prefilled message on your device. Add your dates, group size, or questions before sending it.</p>
+        ${textCta("Ask About My Dates", "dark")}
         <p class="form-note">Text <a href="tel:+19126820830">912-682-0830</a>. Standard messaging rates may apply.</p>
       </div>
     </div>
@@ -539,17 +592,17 @@ function faqBody() {
   <section class="section intro-section">
     <div class="container feature">
       <div class="feature-copy">
-        <p class="eyebrow">Stay details</p>
-        <h2>The practical questions, answered plainly.</h2>
-        <p>Start with the confirmed location details, amenities, travel times, and experiences that can help you decide whether Sapelo House fits the trip you have in mind.</p>
+        <p class="eyebrow">Straight answers</p>
+        <h2>Start with what matters most to your stay.</h2>
+        <p>Sapelo House is across from the Sapelo River, with shared indoor and outdoor spaces, nearby fishing, and several coastal Georgia destinations within reach. The details below cover the questions most guests ask first.</p>
       </div>
       <div class="feature-image">${imageTag(images.sideYard)}</div>
     </div>
   </section>
   <section class="section">
     <div class="container section-heading">
-      <div><p class="eyebrow">Clear answers</p><h2>Facts visitors can trust.</h2></div>
-      <p>Rates, sleeping capacity, policies, and other owner-specific details should be confirmed as part of the booking inquiry.</p>
+      <div><p class="eyebrow">Before you book</p><h2>Useful details, without the runaround.</h2></div>
+      <p>For rates, sleeping capacity, policies, arrival information, and questions specific to your group, text 912-682-0830.</p>
     </div>
     <div class="container card-grid">
       ${faqs.map(item => `<article class="faq-item"><h2>${esc(item.q)}</h2><p>${esc(item.a)}</p></article>`).join("")}
@@ -557,11 +610,12 @@ function faqBody() {
   </section>
   <section class="section dark-band">
     <div class="container section-heading">
-      <div><p class="eyebrow">Confirmed at a glance</p><h2>What Sapelo House offers.</h2></div>
-      <p>A concise view of the setting, travel times, outdoor spaces, and shared rooms.</p>
+      <div><p class="eyebrow">At a glance</p><h2>The setting, spaces, and coast around you.</h2></div>
+      <p>The essentials behind a stay at Sapelo House, gathered in one place.</p>
     </div>
     <ul class="container fact-grid">${facts.map(fact => `<li>${esc(fact)}</li>`).join("")}</ul>
   </section>
+  ${bookingInvitation("Still Have a Question", "Ask it before it becomes a reason to wait.", "A direct text is the fastest way to clarify the details that matter to your stay and ask about availability.", "Text Sapelo House")}
 </main>`;
 }
 
