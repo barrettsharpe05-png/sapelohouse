@@ -364,7 +364,8 @@ main {
 }
 
 .feature-image {
-  min-height: 430px;
+  aspect-ratio: 16 / 10;
+  min-height: 0;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -373,7 +374,7 @@ main {
 .feature-image img {
   width: 100%;
   height: 100%;
-  min-height: 430px;
+  min-height: 0;
   object-fit: cover;
 }
 
@@ -641,9 +642,10 @@ textarea {
 .image-triptych,
 .gallery-feature {
   display: grid;
-  grid-template-columns: 1.1fr 0.82fr 1fr;
-  gap: 0.9rem;
-  align-items: end;
+  grid-template-columns: minmax(0, 1.45fr) minmax(340px, 0.75fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
   margin-top: 2.6rem;
 }
 
@@ -659,7 +661,8 @@ textarea {
 
 .image-panel img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   transition: transform 500ms ease;
 }
@@ -678,35 +681,42 @@ textarea {
   font-weight: 800;
 }
 
-.image-triptych .image-panel:first-child img {
-  aspect-ratio: 5 / 6;
+.image-triptych .image-panel:first-child,
+.gallery-feature .image-panel:first-child {
+  grid-column: 1;
+  grid-row: 1 / 3;
 }
 
-.image-triptych .image-panel:nth-child(2) {
-  margin-bottom: 3rem;
-}
-
-.image-triptych .image-panel:nth-child(2) img {
-  aspect-ratio: 4 / 5;
-}
-
-.image-triptych .image-panel:nth-child(3) img {
-  aspect-ratio: 5 / 7;
+.image-triptych .image-panel:first-child img,
+.gallery-feature .image-panel:first-child img {
+  aspect-ratio: auto;
 }
 
 .stacked-photos {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 0.75rem;
-  align-items: end;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  min-height: 520px;
+  align-items: stretch;
 }
 
-.stacked-photos .image-panel:first-child {
-  margin-bottom: 2.5rem;
+.stacked-photos .image-panel {
+  grid-column: 1;
+  grid-row: 1;
+  width: 78%;
+  align-self: start;
+  justify-self: start;
 }
 
 .stacked-photos .image-panel img {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
+}
+
+.stacked-photos .image-panel:nth-child(2) {
+  width: 68%;
+  align-self: end;
+  justify-self: end;
+  z-index: 1;
 }
 
 .sensory-band {
@@ -762,16 +772,8 @@ textarea {
   margin-bottom: 4.5rem;
 }
 
-.gallery-feature .image-panel:first-child {
-  grid-row: span 2;
-}
-
-.gallery-feature .image-panel:first-child img {
-  aspect-ratio: 4 / 5;
-}
-
 .gallery-feature .image-panel:not(:first-child) img {
-  aspect-ratio: 5 / 4;
+  aspect-ratio: 16 / 10;
 }
 
 .proof-card,
@@ -854,6 +856,7 @@ textarea {
   .gallery-feature,
   .stacked-photos {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 
   .hero-facts {
@@ -869,15 +872,25 @@ textarea {
     padding-left: 1rem;
   }
 
-  .image-triptych .image-panel:nth-child(2),
-  .stacked-photos .image-panel:first-child {
-    margin-bottom: 0;
+  .image-triptych .image-panel:first-child,
+  .gallery-feature .image-panel:first-child,
+  .stacked-photos .image-panel,
+  .stacked-photos .image-panel:nth-child(2) {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    justify-self: stretch;
   }
 
   .image-triptych .image-panel img,
   .gallery-feature .image-panel img,
   .stacked-photos .image-panel img {
     aspect-ratio: 4 / 3;
+  }
+
+  .stacked-photos {
+    min-height: 0;
+    gap: 1rem;
   }
 
   .sensory-list article {
