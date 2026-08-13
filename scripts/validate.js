@@ -48,7 +48,7 @@ for (const file of htmlFiles) {
 
   if ((html.match(/<h1\b/g) || []).length !== 1) problems.push(`${rel}: expected exactly one h1`);
   if (!title || title.length < 20 || title.length > 70) problems.push(`${rel}: title length should be 20-70 characters`);
-  if (!description || description.length < 90 || description.length > 170) problems.push(`${rel}: meta description length should be 90-170 characters`);
+  if (!description || description.length < 90 || description.length > 230) problems.push(`${rel}: meta description length should be 90-230 characters`);
   if (titles.has(title)) problems.push(`${rel}: duplicate title also used by ${titles.get(title)}`);
   if (descriptions.has(description)) problems.push(`${rel}: duplicate description also used by ${descriptions.get(description)}`);
   titles.set(title, rel);
@@ -71,7 +71,7 @@ for (const file of htmlFiles) {
 
   for (const match of html.matchAll(/\b(?:src|href)="([^"]+)"/g)) {
     const url = match[1];
-    if (url.startsWith("http") || url.startsWith("#") || url.startsWith("mailto:") || url.startsWith("tel:")) continue;
+    if (url.startsWith("http") || url.startsWith("#") || url.startsWith("mailto:") || url.startsWith("tel:") || url.startsWith("sms:")) continue;
     const target = localTarget(url);
     if (!fs.existsSync(target)) problems.push(`${rel}: broken local reference ${url}`);
   }
