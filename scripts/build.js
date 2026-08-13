@@ -280,10 +280,8 @@ function homeBody() {
       <h2>A coastal Georgia stay where the river setting does the selling.</h2>
       <p>Sapelo House is not presented as a generic rental. The site is built around the real images: live oaks over the Sapelo River, shaded porch seating, a back deck with grill, and interior spaces meant for gathering after days outside.</p>
     </div>
-    <div class="container image-triptych">
+    <div class="container wide-photo-feature">
       ${imagePanel("riverMoss", "Sapelo River scenery framed by Spanish moss")}
-      ${imagePanel("porchSeating", "Covered porch seating for slow mornings")}
-      ${imagePanel("openLivingKitchen", "Open living, kitchen, dining, and pool table area")}
     </div>
   </section>
   <section class="section">
@@ -294,9 +292,9 @@ function homeBody() {
       </div>
       <p>Sapelo House pairs a peaceful coastal setting with the practical spaces people want in a vacation rental: a screened porch, a back deck with grill, large kitchen, dining room, living room, and pool table.</p>
     </div>
-    <div class="container proof-grid">
+    <div class="container proof-grid photo-story-grid">
       ${proofCard("riverMoss", "The Sapelo River Setting", "Live oaks, Spanish moss, and water views shape the first impression of the stay.")}
-      ${proofCard("porchSeating", "Screened Porch Mornings", "Guests can wake up and watch dolphins from the screened porch.")}
+      ${proofCard("frontPorch", "Screened Porch Mornings", "Guests can wake up and watch dolphins from the screened porch.")}
       ${proofCard("openLivingKitchen", "Gathering Spaces", "The photos show open living, kitchen, dining, and recreation spaces for time together.")}
     </div>
   </section>
@@ -321,7 +319,7 @@ function homeBody() {
 
 function houseBody() {
   const cards = [
-    ["porchSeating", "Screened porch", "A shaded porch space anchors the morning experience, including the confirmed opportunity to watch dolphins."],
+    ["frontPorch", "Screened porch", "A shaded porch space anchors the morning experience, including the confirmed opportunity to watch dolphins."],
     ["backDeck", "Back deck with grill", "The photos show a back deck with outdoor seating and a grill for relaxed coastal evenings."],
     ["sectional", "Large living room", "The living room photos show generous seating and an open layout for gathering."],
     ["kitchenIsland", "Large kitchen", "White cabinetry, stainless appliances, and an island are visible in the kitchen photos."],
@@ -336,9 +334,8 @@ function houseBody() {
         <h2>Plainspoken comfort, framed by coastal light and outdoor rooms.</h2>
         <p>The home centers the spaces that make a shared stay comfortable: porch seating, a back deck, a large living room, a large kitchen, a dining room, and a pool table.</p>
       </div>
-      <div class="stacked-photos">
+      <div class="wide-photo-feature">
         ${imagePanel("exterior", "Front exterior of Sapelo House")}
-        ${imagePanel("frontPorch", "Covered front porch entry")}
       </div>
     </div>
   </section>
@@ -347,7 +344,7 @@ function houseBody() {
       <div><p class="eyebrow">Photo-led tour</p><h2>The house keeps the stay grounded in shared spaces.</h2></div>
       <p>Explore the rooms and outdoor spaces that shape daily life at Sapelo House, shown through the real property photography.</p>
     </div>
-    <div class="container card-grid">${cards.map(([key, title, copy]) => proofCard(key, title, copy)).join("")}</div>
+    <div class="container card-grid house-tour-grid">${cards.map(([key, title, copy]) => proofCard(key, title, copy)).join("")}</div>
   </section>
   <section class="section dark-band">
     <div class="container feature reverse">
@@ -390,9 +387,9 @@ function experienceBody() {
     </div>
   </section>
   <section class="section band">
-    <div class="container proof-grid">
-      ${proofCard("coveredBackDeck", "Evenings Outside", "Covered deck seating and a fan create a shaded outdoor place to settle in.")}
-      ${proofCard("poolTableFireplace", "Games After Dinner", "The pool table gives guests a built-in activity without leaving the house.")}
+    <div class="container proof-grid photo-story-grid">
+      ${proofCard("frontPorch", "Evenings Outside", "Covered seating creates a shaded outdoor place to settle in.")}
+      ${proofCard("livingPool", "Games After Dinner", "The pool table gives guests a built-in activity without leaving the house.")}
       ${proofCard("dining", "Meals Together", "The dining room and large kitchen support the simple rhythm of cooking and eating together.")}
     </div>
   </section>
@@ -442,10 +439,8 @@ function galleryBody() {
       <div><p class="eyebrow">The property in pictures</p><h2>Move from the river setting to the porch, deck, and shared rooms.</h2></div>
       <p>Browse the real spaces in a natural sequence, from the landscape and outdoor rooms to the kitchen, living areas, bedrooms, baths, and recreation space.</p>
     </div>
-    <div class="container gallery-feature">
+    <div class="container wide-photo-feature gallery-feature">
       ${imagePanel("riverView", "River view from the Sapelo House lawn")}
-      ${imagePanel("backDeck", "Back deck seating and grill")}
-      ${imagePanel("kitchenIsland", "Large kitchen with island and stainless appliances")}
     </div>
     <div class="container">
       ${galleryGroups.map(group => `<section class="gallery-group" aria-labelledby="${group.title.toLowerCase().replaceAll(" ", "-")}">

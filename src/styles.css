@@ -307,8 +307,21 @@ main {
 .card-grid,
 .fact-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.photo-story-grid,
+.house-tour-grid {
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.photo-story-grid .proof-card,
+.house-tour-grid .proof-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.65fr);
+  align-items: stretch;
 }
 
 .proof-card,
@@ -324,14 +337,24 @@ main {
 .proof-card img,
 .info-card img {
   width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  background: #16231c;
 }
 
 .proof-card div,
 .info-card div,
 .faq-item {
   padding: 1.1rem;
+}
+
+.photo-story-grid .proof-card div,
+.house-tour-grid .proof-card div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 3rem);
 }
 
 .proof-card h3,
@@ -364,7 +387,7 @@ main {
 }
 
 .feature-image {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: auto;
   min-height: 0;
   border-radius: var(--radius);
   overflow: hidden;
@@ -373,9 +396,9 @@ main {
 
 .feature-image img {
   width: 100%;
-  height: 100%;
+  height: auto;
   min-height: 0;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .quiet-list {
@@ -439,8 +462,8 @@ main {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
 .gallery-card {
@@ -453,9 +476,9 @@ main {
 
 .gallery-card img {
   width: 100%;
-  height: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
   transition: transform 260ms ease;
 }
 
@@ -639,14 +662,12 @@ textarea {
   font-size: 1.08rem;
 }
 
-.image-triptych,
-.gallery-feature {
-  display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(340px, 0.75fr);
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  align-items: stretch;
+.wide-photo-feature {
   margin-top: 2.6rem;
+}
+
+.wide-photo-feature .image-panel {
+  width: 100%;
 }
 
 .image-panel {
@@ -661,9 +682,9 @@ textarea {
 
 .image-panel img {
   width: 100%;
-  height: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
   transition: transform 500ms ease;
 }
 
@@ -679,44 +700,6 @@ textarea {
   background: linear-gradient(0deg, rgba(11, 22, 17, 0.84), rgba(11, 22, 17, 0));
   font-size: 0.79rem;
   font-weight: 800;
-}
-
-.image-triptych .image-panel:first-child,
-.gallery-feature .image-panel:first-child {
-  grid-column: 1;
-  grid-row: 1 / 3;
-}
-
-.image-triptych .image-panel:first-child img,
-.gallery-feature .image-panel:first-child img {
-  aspect-ratio: auto;
-}
-
-.stacked-photos {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  min-height: 520px;
-  align-items: stretch;
-}
-
-.stacked-photos .image-panel {
-  grid-column: 1;
-  grid-row: 1;
-  width: 78%;
-  align-self: start;
-  justify-self: start;
-}
-
-.stacked-photos .image-panel img {
-  aspect-ratio: 4 / 3;
-}
-
-.stacked-photos .image-panel:nth-child(2) {
-  width: 68%;
-  align-self: end;
-  justify-self: end;
-  z-index: 1;
 }
 
 .sensory-band {
@@ -770,10 +753,6 @@ textarea {
 .gallery-feature {
   margin-top: 0;
   margin-bottom: 4.5rem;
-}
-
-.gallery-feature .image-panel:not(:first-child) img {
-  aspect-ratio: 16 / 10;
 }
 
 .proof-card,
@@ -851,12 +830,8 @@ textarea {
   .feature.reverse,
   .contact-layout,
   .footer-grid,
-  .sensory-grid,
-  .image-triptych,
-  .gallery-feature,
-  .stacked-photos {
+  .sensory-grid {
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
   }
 
   .hero-facts {
@@ -872,25 +847,9 @@ textarea {
     padding-left: 1rem;
   }
 
-  .image-triptych .image-panel:first-child,
-  .gallery-feature .image-panel:first-child,
-  .stacked-photos .image-panel,
-  .stacked-photos .image-panel:nth-child(2) {
-    grid-column: 1;
-    grid-row: auto;
-    width: 100%;
-    justify-self: stretch;
-  }
-
-  .image-triptych .image-panel img,
-  .gallery-feature .image-panel img,
-  .stacked-photos .image-panel img {
-    aspect-ratio: 4 / 3;
-  }
-
-  .stacked-photos {
-    min-height: 0;
-    gap: 1rem;
+  .photo-story-grid .proof-card,
+  .house-tour-grid .proof-card {
+    grid-template-columns: 1fr;
   }
 
   .sensory-list article {
