@@ -78,6 +78,11 @@ for (const file of htmlFiles) {
     if (lowerHtml.includes(phrase)) problems.push(`${rel}: development language remains: ${phrase}`);
   }
 
+  const smsButtons = [...html.matchAll(/<a class="btn [^"]+" href="sms:[^"]+">([^<]+)<\/a>/g)];
+  if (smsButtons.length !== 1) problems.push(`${rel}: expected exactly one SMS call-to-action, found ${smsButtons.length}`);
+  const expectedSmsLabel = rel === "index.html" ? "Find Your Dates" : "Reserve The Sapelo House";
+  if (smsButtons[0]?.[1] !== expectedSmsLabel) problems.push(`${rel}: SMS call-to-action should read ${expectedSmsLabel}`);
+
   for (const match of html.matchAll(/<img\b([^>]+)>/g)) {
     const attrs = match[1];
     for (const required of ["src=", "srcset=", "sizes=", "width=", "height=", "alt=", "loading=", "decoding="]) {
