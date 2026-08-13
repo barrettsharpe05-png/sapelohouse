@@ -287,13 +287,13 @@ function sensoryBand(title, copy, items) {
   </section>`;
 }
 
-function bookingInvitation(eyebrow, title, copy, label = "Ask About My Dates") {
+function bookingInvitation(eyebrow, title, copy) {
   return `<section class="section booking-cta-band">
     <div class="container booking-cta-inner">
       <p class="eyebrow">${esc(eyebrow)}</p>
       <h2>${esc(title)}</h2>
       <p>${esc(copy)}</p>
-      <div class="button-row">${textCta(label, "primary")}</div>
+      <div class="button-row">${textCta("Reserve The Sapelo House", "primary")}</div>
     </div>
   </section>`;
 }
@@ -374,7 +374,6 @@ function homeBody() {
           "There is something wonderfully freeing about staying in a place where the day does not have to be optimized. Explore as much of coastal Georgia as you want and still know that, at the end of it, Sapelo House is waiting.",
           "Come back. Put something on the grill. Find a chair outside. Pour a drink. Play another game of pool. Watch the light fade through the trees. Tomorrow can figure itself out tomorrow."
         ])}</div>
-        <div class="button-row">${textCta("Discover the Area", "dark")}${textCta("See More of Sapelo House", "light")}</div>
       </div>
       <div class="feature-image">${imageTag(images.backDeck)}</div>
     </div>
@@ -400,7 +399,6 @@ function homeBody() {
       <p class="eyebrow">Your Sapelo House Story</p>
       <h2>Someday, this trip will be a story you tell.</h2>
       <p>Maybe it becomes the weekend everybody keeps talking about. Maybe it is the family trip that finally gets everyone in the same place. Maybe it is a few quiet days you did not realize how badly you needed. Whatever brings you to coastal Georgia, Sapelo House gives you a beautiful place to begin. The river is here. The porch is waiting. And your dates may still be open.</p>
-      <div class="button-row">${textCta("Check Availability", "primary")}${textCta("Explore the House", "secondary")}</div>
     </div>
   </section>
 </main>`;
@@ -449,7 +447,7 @@ function houseBody() {
       <div class="feature-image">${imageTag(images.openConcept)}</div>
     </div>
   </section>
-  ${bookingInvitation("Come See How It Feels", "The house makes more sense once everyone is in it.", "If Sapelo House feels like the right setting for your people, ask about the dates you have in mind.", "Ask About My Dates")}
+  ${bookingInvitation("Come See How It Feels", "The house makes more sense once everyone is in it.", "If Sapelo House feels like the right setting for your people, ask about the dates you have in mind.")}
 </main>`;
 }
 
@@ -481,7 +479,7 @@ function experienceBody() {
       ${proofCard("frontPorch", "Tomorrow Can Wait Until Morning", "The day ends without the normal world pressing in. Sit outside a little longer. Make plans if you want them. Leave the next day open if you do not.")}
     </div>
   </section>
-  ${bookingInvitation("A Few Days at a Different Pace", "You do not need a full itinerary. You only need the dates.", "If this is how you want your next coastal Georgia getaway to feel, start the conversation with a text.", "See If My Dates Are Available")}
+  ${bookingInvitation("A Few Days at a Different Pace", "You do not need a full itinerary. You only need the dates.", "If this is how you want your next coastal Georgia getaway to feel, start the conversation with a text.")}
 </main>`;
 }
 
@@ -522,7 +520,7 @@ function locationBody() {
     </div>
     <div class="container location-list">${locations.map(([title, copy]) => `<article><h2>${esc(title)}</h2><p>${esc(copy)}</p></article>`).join("")}</div>
   </section>
-  ${bookingInvitation("Your Coastal Georgia Base", "See the coast. Then leave the crowds behind.", "Ask about a stay near the Sapelo River, with Darien, the islands, Savannah, and nearby fishing ready when you want them.", "Start Planning My Stay")}
+  ${bookingInvitation("Your Coastal Georgia Base", "See the coast. Then leave the crowds behind.", "Ask about a stay near the Sapelo River, with Darien, the islands, Savannah, and nearby fishing ready when you want them.")}
 </main>`;
 }
 
@@ -549,7 +547,7 @@ function galleryBody() {
       </section>`).join("")}
     </div>
   </section>
-  ${bookingInvitation("Seen Enough to Wonder", "The next picture could have your people in it.", "If the house and its setting feel right, ask whether your dates are still open.", "Ask About My Dates")}
+  ${bookingInvitation("Seen Enough to Wonder", "The next picture could have your people in it.", "If the house and its setting feel right, ask whether your dates are still open.")}
 </main>`;
 }
 
@@ -581,7 +579,7 @@ function bookingBody() {
         <p class="eyebrow">Text Sapelo House</p>
         <h2>See if your dates are available.</h2>
         <p>The button opens a prefilled message on your device. Add your dates, group size, or questions before sending it.</p>
-        ${textCta("Ask About My Dates", "dark")}
+        ${textCta("Reserve The Sapelo House", "dark")}
         <p class="form-note">Text <a href="tel:+19126820830">912-682-0830</a>. Standard messaging rates may apply.</p>
       </div>
     </div>
@@ -617,7 +615,7 @@ function faqBody() {
     </div>
     <ul class="container fact-grid">${facts.map(fact => `<li>${esc(fact)}</li>`).join("")}</ul>
   </section>
-  ${bookingInvitation("Still Have a Question", "Ask it before it becomes a reason to wait.", "A direct text is the fastest way to clarify the details that matter to your stay and ask about availability.", "Text Sapelo House")}
+  ${bookingInvitation("Still Have a Question", "Ask it before it becomes a reason to wait.", "A direct text is the fastest way to clarify the details that matter to your stay and ask about availability.")}
 </main>`;
 }
 
