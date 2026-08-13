@@ -62,6 +62,22 @@ for (const file of htmlFiles) {
   if (!html.includes('rel="preload" as="image"')) problems.push(`${rel}: missing hero image preload`);
   if (html.includes("placeholder copy") || html.includes("AI-readable facts")) problems.push(`${rel}: internal or placeholder language remains`);
 
+  const developmentLanguage = [
+    "owner-provided brief",
+    "confirmed amenities",
+    "confirmed regional travel times",
+    "the photos show",
+    "visible in the photographs",
+    "real property photography",
+    "facts visitors can trust",
+    "the exact address was not provided",
+    "based on the supplied information"
+  ];
+  const lowerHtml = html.toLowerCase();
+  for (const phrase of developmentLanguage) {
+    if (lowerHtml.includes(phrase)) problems.push(`${rel}: development language remains: ${phrase}`);
+  }
+
   for (const match of html.matchAll(/<img\b([^>]+)>/g)) {
     const attrs = match[1];
     for (const required of ["src=", "srcset=", "sizes=", "width=", "height=", "alt=", "loading=", "decoding="]) {
