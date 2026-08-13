@@ -2,6 +2,8 @@
 
 Photos were extracted from `sapelo-house-webp-seo.zip` into `public/sapelo-house-webp-seo/images/`. The filenames were already SEO-oriented WebP assets, so they were preserved for maintainability.
 
+Three additional first-party Sapelo River sunset photographs were supplied by the owner on August 13, 2026. They were reviewed individually, given descriptive production filenames, resized to 2400-pixel masters, and given 1600- and 960-pixel responsive variants.
+
 ## Hero Assignments
 
 | Slot | Temporary hero image | Replacement note |
@@ -48,3 +50,6 @@ Photos were extracted from `sapelo-house-webp-seo.zip` into `public/sapelo-house
 | `sapelo-house-riverfront-yard-live-oaks.webp` | Yard with live oaks, Spanish moss, palms, and river view | FAQ hero, setting gallery | Yard at Sapelo House with live oak trees, Spanish moss, palms, and a view toward the Sapelo River. | Avoids ownership/private waterfront claims. |
 | `sapelo-house-sapelo-river-through-spanish-moss.webp` | Sapelo River through Spanish moss | Location hero, gallery | Sapelo River scenery from Sapelo House, framed by Spanish moss and mature coastal trees. | None. |
 | `sapelo-house-side-yard-live-oaks-exterior.webp` | Side yard and exterior with live oaks | Exterior gallery, fallback hero | Side yard view of Sapelo House with live oak trees, Spanish moss, and a sunny lawn. | None. |
+| `sapelo-river-orange-sunset-clouds-coastal-georgia.webp` | Orange Sapelo River sunset, dramatic clouds, water, and dock structure | Experience editorial feature, sunset gallery | Orange sunset over the Sapelo River with dramatic clouds and a dock in the foreground in coastal Georgia. | The photograph was taken in the Sapelo House area; the dock is not identified as property-owned. |
+| `sapelo-river-golden-sunset-dock-coastal-georgia.webp` | Sun above the far marsh, golden reflection across the river, and dock structure | Homepage social card source, sunset gallery | Sun setting beyond the marsh across the Sapelo River with a golden reflection on the water and a dock in the foreground. | The photograph was taken in the Sapelo House area; the dock is not identified as property-owned. |
+| `sapelo-river-pink-blue-evening-sky-coastal-georgia.webp` | Pink and blue afterglow above the Sapelo River | Location editorial feature, sunset gallery | Pink and blue evening sky over the Sapelo River after sunset in coastal Georgia. | Exact viewpoint is not stated; copy identifies only the Sapelo House area. |
