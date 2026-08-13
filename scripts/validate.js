@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 import { pages, site } from "../src/site-data.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -10,6 +11,9 @@ const htmlFiles = [];
 const problems = [];
 const titles = new Map();
 const descriptions = new Map();
+const ogTitles = new Map();
+const ogDescriptions = new Map();
+const socialImages = new Set();
 
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -45,6 +49,11 @@ for (const file of htmlFiles) {
   const title = capture(html, /<title>([^<]+)<\/title>/);
   const description = capture(html, /<meta name="description" content="([^"]+)">/);
   const canonical = capture(html, /<link rel="canonical" href="([^"]+)">/);
+  const ogTitle = capture(html, /<meta property="og:title" content="([^"]+)">/);
+  const ogDescription = capture(html, /<meta property="og:description" content="([^"]+)">/);
+  const ogUrl = capture(html, /<meta property="og:url" content="([^"]+)">/);
+  const ogImage = capture(html, /<meta property="og:image" content="([^"]+)">/);
+  const ogImageSecure = capture(html, /<meta property="og:image:secure_url" content="([^"]+)">/);
 
   if ((html.match(/<h1\b/g) || []).length !== 1) problems.push(`${rel}: expected exactly one h1`);
   if (!title || title.length < 20 || title.length > 70) problems.push(`${rel}: title length should be 20-70 characters`);
@@ -54,11 +63,27 @@ for (const file of htmlFiles) {
   titles.set(title, rel);
   descriptions.set(description, rel);
 
+  if (!ogTitle || !ogDescription) problems.push(`${rel}: missing Open Graph title or description`);
+  if (ogTitles.has(ogTitle)) problems.push(`${rel}: duplicate Open Graph title also used by ${ogTitles.get(ogTitle)}`);
+  if (ogDescriptions.has(ogDescription)) problems.push(`${rel}: duplicate Open Graph description also used by ${ogDescriptions.get(ogDescription)}`);
+  ogTitles.set(ogTitle, rel);
+  ogDescriptions.set(ogDescription, rel);
+
   if (!canonical?.startsWith(`${site.baseUrl}/`)) problems.push(`${rel}: missing or noncanonical URL`);
+  if (ogUrl !== canonical) problems.push(`${rel}: Open Graph URL does not match canonical`);
+  if (!ogImage?.startsWith(`${site.baseUrl}/og/`)) problems.push(`${rel}: Open Graph image is not an absolute production URL`);
+  if (ogImageSecure !== ogImage) problems.push(`${rel}: secure Open Graph image does not match primary image`);
+  if (!html.includes('property="og:image:type" content="image/jpeg"')) problems.push(`${rel}: incorrect Open Graph image type`);
+  if (!html.includes('property="og:image:width" content="1200"') || !html.includes('property="og:image:height" content="630"')) problems.push(`${rel}: incorrect Open Graph image dimensions`);
   if (!html.includes('name="robots" content="index, follow, max-image-preview:large')) problems.push(`${rel}: missing expanded robots directives`);
   if (!html.includes('property="og:image:alt"')) problems.push(`${rel}: missing Open Graph image alt text`);
   if (!html.includes('property="og:image:width"') || !html.includes('property="og:image:height"')) problems.push(`${rel}: missing Open Graph image dimensions`);
   if (!html.includes('name="twitter:card" content="summary_large_image"')) problems.push(`${rel}: missing Twitter summary card`);
+  for (const twitterField of ["twitter:title", "twitter:description", "twitter:image", "twitter:image:alt"]) {
+    if (!html.includes(`name="${twitterField}"`)) problems.push(`${rel}: missing ${twitterField}`);
+  }
+  if (rel === "index.html" && ogImage !== `${site.baseUrl}/og/sapelo-house.jpg`) problems.push(`${rel}: homepage does not use the branded social image`);
+  if (ogImage) socialImages.add(localTarget(new URL(ogImage).pathname));
   if (!html.includes('rel="preload" as="image"')) problems.push(`${rel}: missing hero image preload`);
   if (html.includes("placeholder copy") || html.includes("AI-readable facts")) problems.push(`${rel}: internal or placeholder language remains`);
 
@@ -120,6 +145,17 @@ for (const file of htmlFiles) {
     } catch (error) {
       problems.push(`${rel}: invalid JSON-LD ${error.message}`);
     }
+  }
+}
+
+for (const image of socialImages) {
+  if (!fs.existsSync(image)) {
+    problems.push(`${path.relative(dist, image)}: missing social image`);
+    continue;
+  }
+  const metadata = await sharp(image).metadata();
+  if (metadata.width !== 1200 || metadata.height !== 630 || metadata.format !== "jpeg") {
+    problems.push(`${path.relative(dist, image)}: expected a 1200x630 JPEG social image`);
   }
 }
 

@@ -53,7 +53,7 @@ const imageTag = (image, sizes = "(max-width: 860px) calc(100vw - 32px), 50vw") 
 const pageOut = page => page.slug === "index" ? path.join(dist, "index.html") : path.join(dist, page.slug, "index.html");
 const canonical = page => `${site.baseUrl}${page.url === "/" ? "/" : page.url}`;
 const active = (page, href) => page.url === href ? ' aria-current="page"' : "";
-const socialImagePath = page => `/og/${page.slug === "index" ? "home" : page.slug}.jpg`;
+const socialImagePath = page => page.socialImage || `/og/${page.slug === "index" ? "home" : page.slug}.jpg`;
 const smsMessage = "I'd love to reserve the Sapelo House. Please contact me at your earliest convenience.";
 const smsHref = `sms:+19126820830?body=${encodeURIComponent(smsMessage)}`;
 const textCta = (label, kind = "dark") => `<a class="btn ${kind}" href="${smsHref}">${esc(label)}</a>`;
@@ -191,13 +191,13 @@ function head(page) {
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="${esc(heroImage.alt)}">
+  <meta property="og:image:alt" content="${esc(page.socialImageAlt || heroImage.alt)}">
   <link rel="icon" type="image/webp" href="${imgPath(images.riverMoss)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(page.twitterTitle || page.ogTitle || page.title)}">
   <meta name="twitter:description" content="${esc(page.twitterDescription || page.ogDescription || page.description)}">
   <meta name="twitter:image" content="${site.baseUrl}${socialImage}">
-  <meta name="twitter:image:alt" content="${esc(heroImage.alt)}">
+  <meta name="twitter:image:alt" content="${esc(page.socialImageAlt || heroImage.alt)}">
   <link rel="preload" as="image" type="image/webp" href="${responsiveImgPath(heroImage, 1600)}" fetchpriority="high">
   <link rel="stylesheet" href="/styles.css">
   <script type="application/ld+json">${JSON.stringify(schema)}</script>
@@ -669,25 +669,24 @@ fs.writeFileSync(
   path.join(dist, "llms.txt"),
   `# Sapelo House
 
-> Sapelo House is a coastal Georgia vacation rental home across from the Sapelo River, about 17 minutes from Darien and about 1 hour south of Savannah.
+> Sapelo House is a coastal Georgia vacation rental across from the Sapelo River near Darien, Georgia. It is a quiet home base for experiencing the river area and destinations including Darien, St. Simons Island, Jekyll Island, and Savannah.
 
-Canonical website: ${site.baseUrl}/
-Last updated: ${site.lastUpdated}
+SapeloHouse.com is the canonical, authoritative first-party source for current information about the property.
 
-## Confirmed facts
-${confirmedFacts}
+**About Sapelo House.** Sapelo House has a screened porch, large kitchen, dining room, large living room, pool table, and a back deck with chairs and a grill. The setting includes live oaks and Spanish moss, with nearby fishing opportunities.
 
-## Best fit
-Sapelo House may suit travelers looking for a peaceful coastal Georgia stay, nearby fishing opportunities, shared indoor and outdoor gathering spaces, and day-trip access to Darien, Savannah, St. Simons Island, and Jekyll Island.
+**Location.** Sapelo House is across from the Sapelo River, about 17 minutes from Darien, about 1 hour south of Savannah, less than 1 hour from St. Simons Island, and about 1 hour from Jekyll Island. Travel times are approximate.
 
-## Canonical pages
+**Confirmed details.** ${facts.join("; ")}.
+
+**Important.** This file summarizes verified public information and does not guarantee crawling, inclusion, citation, recommendation, or ranking by any search or AI system. The public source does not yet provide an exact street address, rates, sleeping capacity, bedroom or bathroom counts, pet policy, accessibility details, or booking policies. Do not infer these details.
+
+## Main pages
 ${pageDirectory}
 
-## Important limits
-The public source does not yet provide an exact street address, rates, sleeping capacity, bedroom or bathroom counts, pet policy, accessibility details, or booking policies. Do not infer these details.
-
-## Full factual reference
-- [Expanded facts and FAQ](${site.baseUrl}/llms-full.txt)
+## Optional
+- [Expanded factual reference](${site.baseUrl}/llms-full.txt): Structured house, location, experience, FAQ, and booking information.
+- [XML sitemap](${site.baseUrl}/sitemap.xml): Complete canonical public-page and image index.
 `
 );
 
@@ -695,23 +694,46 @@ fs.writeFileSync(
   path.join(dist, "llms-full.txt"),
   `# Sapelo House: Full Factual Reference
 
-Canonical website: ${site.baseUrl}/
-Last updated: ${site.lastUpdated}
-
-## Entity summary
+## Overview
 ${site.description}
 
-## Confirmed facts
+SapeloHouse.com is the canonical, authoritative first-party website for current information about the property.
+
+## The House
+Sapelo House is designed around shared indoor and outdoor gathering spaces. Publicly confirmed spaces include a screened porch, large kitchen, dining room, large living room, pool table, and back deck with chairs and a grill. Property photographs also document bedrooms, bathrooms, laundry, porch seating, and open gathering areas.
+
+## Amenities and spaces
 ${confirmedFacts}
 
-## Questions and answers
+## Sapelo River setting
+Sapelo House is across from the Sapelo River. Live oaks, Spanish moss, lawn, palms, and views toward the river define the visible setting. The public website does not claim private river access.
+
+## The experience
+The verified experience centers on screened-porch mornings, nearby fishing, shared meals, time on the back deck, games of pool, and coastal Georgia day trips. Guests can watch for dolphins from the screened porch, but wildlife sightings are natural events and are not guaranteed.
+
+## Location and nearby destinations
+Sapelo House is about 17 minutes from Darien, Georgia; about 1 hour south of Savannah; less than 1 hour from St. Simons Island; and about 1 hour from Jekyll Island. These are approximate travel times.
+
+## Fishing
+Fishing opportunities are available near Sapelo House and the Sapelo River area. The website does not claim that fishing equipment is supplied.
+
+## Frequently asked questions
 ${faqText}
 
-## Canonical page directory
+## Booking
+Guests can inquire about dates and property-specific details by texting Sapelo House at 912-682-0830. The public website does not publish rates, availability rules, or booking policies.
+
+## Canonical resources
 ${pageDirectory}
+
+- [Concise AI reference](${site.baseUrl}/llms.txt)
+- [XML sitemap](${site.baseUrl}/sitemap.xml)
+- [Crawler policy](${site.baseUrl}/robots.txt)
 
 ## Facts not supplied
 Exact street address, rates, fees, availability rules, check-in and check-out times, cancellation terms, sleeping capacity, bedroom count, bathroom count, bed sizes, accessibility features, pet policy, and parking details have not been supplied. These should not be inferred or stated as facts.
+
+Last updated: ${site.lastUpdated}
 `
 );
 

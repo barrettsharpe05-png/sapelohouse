@@ -27,4 +27,6 @@ make_card "sapelo-house-riverfront-yard-live-oaks.webp" "gallery.jpg" "Center"
 make_card "sapelo-house-back-deck-outdoor-lounge.webp" "booking.jpg" "Center"
 make_card "sapelo-house-riverfront-yard-live-oaks.webp" "faq.jpg" "Center"
 
-echo "Generated seven social preview images."
+node "$project_dir/scripts/generate-social-card.js"
+
+echo "Generated seven page crops and the branded Sapelo House social card."
