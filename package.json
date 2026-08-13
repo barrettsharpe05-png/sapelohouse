@@ -9,5 +9,8 @@
     "images:responsive": "sh scripts/generate-responsive-images.sh",
     "images:social": "sh scripts/generate-social-images.sh",
     "dev": "python3 -m http.server 4173 -d dist"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.3"
   }
 }

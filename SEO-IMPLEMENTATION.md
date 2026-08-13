@@ -5,11 +5,12 @@
 - Seven crawlable HTML pages with unique titles, descriptions, canonical URLs, one H1, semantic landmarks, and descriptive internal links.
 - A linked Schema.org `@graph` on every page connecting the `WebSite`, `LodgingBusiness`, `WebPage`, `BreadcrumbList`, and primary `ImageObject` entities.
 - `FAQPage` markup on the FAQ page, using the same questions and answers visitors can read on the page.
-- Open Graph and X metadata with page-specific property photography, image dimensions, image type, and image alt text.
+- Complete Open Graph and X metadata with unique page titles and descriptions, absolute canonical URLs, page-specific property photography, image dimensions, image type, and accurate image alt text.
+- A dedicated 1200x630 homepage social card at `/og/sapelo-house.jpg`, built from the authentic Sapelo River photograph with an editorial Sapelo House title treatment.
 - Explicit indexing directives with large-image previews enabled.
 - A crawlable image sitemap containing all 30 property photographs on the Gallery URL and the relevant hero image on every other page.
 - Explicit `robots.txt` access for Googlebot, Bingbot, OAI-SearchBot, ChatGPT-User, and GPTBot.
-- Root-level `llms.txt` and `llms-full.txt` files containing a concise entity summary, confirmed facts, canonical page directory, FAQ answers, and explicit limits on unknown facts.
+- Root-level `llms.txt` and `llms-full.txt` files containing a concise entity summary, house and location context, confirmed facts, canonical resources, FAQ answers, booking information, and explicit limits on unknown facts.
 - Responsive 960px and 1600px WebP variants for all 30 photographs, with `srcset`, `sizes`, intrinsic dimensions, lazy loading, and asynchronous decoding below the hero.
 - Preloaded page-specific hero photography and dependency-free static HTML for fast first rendering.
 
