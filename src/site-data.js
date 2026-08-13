@@ -277,7 +277,7 @@ export const pages = [
     highlights: ["Across from the Sapelo River", "Watch for dolphins from the screened porch", "A home base for Darien, Savannah, St. Simons, and Jekyll"],
     ctas: [
       ["Find Your Dates", "/booking/", "primary"],
-      ["Step Inside Sapelo House", "/house/", "secondary"]
+      ["See The House", "/house/", "secondary"]
     ],
     body: "home"
   },
